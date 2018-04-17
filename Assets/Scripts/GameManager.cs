@@ -4,13 +4,17 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
+	public enum GameState { Playing, Paused }
+	public GameState currentState = GameState.Paused;
+
 	void Update () {
-		
+		switch (currentState) {
+		case GameState.Paused:
+			// do stuff
+			break;
+		case GameState.Playing:
+			// do stuff
+			break;
+		}
 	}
 }

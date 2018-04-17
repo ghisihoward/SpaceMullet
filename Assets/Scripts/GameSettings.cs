@@ -4,13 +4,6 @@ using UnityEngine;
 
 public class GameSettings : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+	[Range (1, 10)]
+	public float mulletMass = 1;
 }

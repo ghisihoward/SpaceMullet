@@ -51,3 +51,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 558c8b25bcc609442b5afa0e07a04937, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mulletMass: 1
