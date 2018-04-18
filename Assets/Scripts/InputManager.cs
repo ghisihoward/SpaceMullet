@@ -4,12 +4,18 @@ using UnityEngine;
 
 public class InputManager : MonoBehaviour {
 
+
 	private GameObject gameManager;
 	private Vector2 mousePressed, mouseReleased;
 
-	private float mouseDelta = 0f;
+	private float posY;
+	private float mouseDeltaX = 0f;
+	private float mouseDeltaY = 0f;
+	private float mulletAngle = 0f;
 	private float initialTime = 0f;
 	private float swipeInterval = 0f;
+	private float posDeltaPositive = 0f;
+	private float posDeltaNegative = 0f;
 
 	// Use this for initialization
 	void Start () {
@@ -28,14 +34,21 @@ public class InputManager : MonoBehaviour {
 
 		if (Input.GetMouseButtonUp (0)) {
 			mouseReleased = CastRayToClick (Input.mousePosition.x, Input.mousePosition.y);
-			mouseDelta = mouseReleased.y - mousePressed.y;
+			mouseDeltaX = mouseReleased.x - mousePressed.x;
+			mouseDeltaY = mouseReleased.y - mousePressed.y;
+
+			posDeltaPositive = mouseDeltaY - mouseDeltaX;
+			posDeltaNegative = mouseDeltaY + mouseDeltaX;
 
 			swipeInterval = Time.time - initialTime;
 
-			if (mouseDelta > 0) {
+			if (mouseDeltaY > 0) {
 				// TODO
 				// Review Math
-				gameManager.GetComponent<GameManager> ().VerticalSwipe ((mouseDelta * 50)/ swipeInterval);
+
+				if (posDeltaPositive > 0.02 && posDeltaNegative > 0.02) {
+					gameManager.GetComponent<GameManager> ().VerticalSwipe (new Vector2 ((mouseDeltaX * 50) / swipeInterval, (mouseDeltaY * 50) / swipeInterval));
+				}
 			}
 		}
 	}

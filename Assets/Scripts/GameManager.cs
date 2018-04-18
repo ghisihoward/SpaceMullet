@@ -34,4 +34,12 @@ public class GameManager : MonoBehaviour {
 			currentState = GameState.Playing;
 		}		
 	}
+
+	public void VerticalSwipe (Vector2 force) {
+		if (currentState == GameState.Paused) {
+			// TODO Review Math
+			player.GetComponent<Rigidbody2D> ().AddForce (force);
+			currentState = GameState.Playing;
+		}		
+	}
 }
