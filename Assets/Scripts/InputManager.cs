@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class InputManager : MonoBehaviour {
 
-
-	Vector2 mousePressed;
-	Vector2 mouseReleased;
+	private GameObject gameManager;
+	private Vector2 mousePressed, mouseReleased;
 
 	private float mouseDelta = 0f;
 	private float initialTime = 0f;
-	private float resultTime = 0f;
+	private float swipeInterval = 0f;
 
 	// Use this for initialization
 	void Start () {
+		gameManager = GameObject.Find ("GameManager");
 		mousePressed = new Vector2 ();
 		mouseReleased = new Vector2 ();
 	}
@@ -22,21 +22,28 @@ public class InputManager : MonoBehaviour {
 	void Update () {
 
 		if (Input.GetMouseButtonDown (0)) {
-			
-			mousePressed = Input.mousePosition;
-			Debug.Log (mousePressed);
-
+			mousePressed = CastRayToClick (Input.mousePosition.x, Input.mousePosition.y);
 			initialTime = Time.time;
 		}
 
 		if (Input.GetMouseButtonUp (0)) {
-			mouseReleased = Input.mousePosition;
+			mouseReleased = CastRayToClick (Input.mousePosition.x, Input.mousePosition.y);
 			mouseDelta = mouseReleased.y - mousePressed.y;
-			resultTime = Time.time - initialTime;
+
+			Debug.Log ("MD: " + mouseDelta);
+
+			swipeInterval = Time.time - initialTime;
 
 			if (mouseDelta > 0) {
-				Debug.Log ("Para cima");
+				gameManager.GetComponent<GameManager> ().VerticalSwipe ((mouseDelta * 50)/ swipeInterval);
 			}
 		}
+	}
+
+	private Vector2 CastRayToClick (float mouseX, float mouseY) {
+		return new Vector2 (
+			Camera.main.ScreenToViewportPoint (new Vector3 (mouseX, mouseY, 0)).x,
+			Camera.main.ScreenToViewportPoint (new Vector3 (mouseX, mouseY, 0)).y
+		);
 	}
 }

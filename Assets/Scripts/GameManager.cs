@@ -4,8 +4,14 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour {
 
-	public enum GameState { Playing, Paused }
-	public GameState currentState = GameState.Paused;
+	private enum GameState { Playing, Paused }
+	private GameState currentState = GameState.Paused;
+
+	private GameObject player;
+
+	void Start () {
+		player = GameObject.FindGameObjectWithTag ("Player");
+	}
 
 	void Update () {
 		switch (currentState) {
@@ -16,5 +22,15 @@ public class GameManager : MonoBehaviour {
 			// do stuff
 			break;
 		}
+	}
+
+	public void VerticalSwipe (float swipeMagnitude) {
+		if (currentState == GameState.Paused) {
+			// TODO Review Math
+			Vector3 forceVector = new Vector3 (0, 1 * swipeMagnitude, 0);
+			player.GetComponent<Rigidbody2D> ().AddForce (forceVector);
+			currentState = GameState.Playing;
+		}
+		
 	}
 }
