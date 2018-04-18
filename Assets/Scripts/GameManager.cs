@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour {
 
-	private enum GameState { Playing, Paused }
+	private enum GameState { Menu, Ready, Playing, Paused, GameOver }
 	private GameState currentState = GameState.Paused;
-
 	private GameObject player;
 
 	void Start () {
@@ -22,6 +21,9 @@ public class GameManager : MonoBehaviour {
 			// do stuff
 			break;
 		}
+
+		// TODO
+		// Verify if player is out of camera bounds.
 	}
 
 	public void VerticalSwipe (float swipeMagnitude) {
