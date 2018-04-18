@@ -30,7 +30,6 @@ public class GameManager : MonoBehaviour {
 			Vector3 forceVector = new Vector3 (0, 1 * swipeMagnitude, 0);
 			player.GetComponent<Rigidbody2D> ().AddForce (forceVector);
 			currentState = GameState.Playing;
-		}
-		
+		}		
 	}
 }

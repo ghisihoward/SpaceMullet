@@ -6,7 +6,6 @@ public class Planet : MonoBehaviour {
 
 	//variables
 	public float varGravitation = 1f;
-	public float force;
 	private GameObject planetCore;
 	private GameObject gameSettings;
 
@@ -18,15 +17,15 @@ public class Planet : MonoBehaviour {
 	}
 	
 	public void SomethingInOrbit (GameObject bodyInOrbit) {
-		Vector3 distance = planetCore.transform.position - bodyInOrbit.transform.position;
-		Vector3 direction = distance.normalized;
+		Vector2 distance = planetCore.transform.position - bodyInOrbit.transform.position;
+		Vector2 direction = distance;
+
 		float magnitude = distance.sqrMagnitude;
+		direction.Normalize();
 
 		Rigidbody2D bodyRb = bodyInOrbit.GetComponent<Rigidbody2D> ();
 		float mulletMass = gameSettings.GetComponent<GameSettings> ().mulletMass;
 
 		bodyRb.AddForce (direction * mulletMass * varGravitation / magnitude);
 	}
-
-
 }

@@ -13,7 +13,7 @@ public class InputManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		gameManager = GameObject.Find ("GameManager");
+		gameManager = GameObject.FindGameObjectWithTag ("GameManager");
 		mousePressed = new Vector2 ();
 		mouseReleased = new Vector2 ();
 	}
@@ -30,11 +30,11 @@ public class InputManager : MonoBehaviour {
 			mouseReleased = CastRayToClick (Input.mousePosition.x, Input.mousePosition.y);
 			mouseDelta = mouseReleased.y - mousePressed.y;
 
-			Debug.Log ("MD: " + mouseDelta);
-
 			swipeInterval = Time.time - initialTime;
 
 			if (mouseDelta > 0) {
+				// TODO
+				// Review Math
 				gameManager.GetComponent<GameManager> ().VerticalSwipe ((mouseDelta * 50)/ swipeInterval);
 			}
 		}

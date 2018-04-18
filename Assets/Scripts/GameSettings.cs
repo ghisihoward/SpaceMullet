@@ -6,4 +6,7 @@ public class GameSettings : MonoBehaviour {
 
 	[Range (1, 10)]
 	public float mulletMass = 1;
+
+	[Range (0, 1)]
+	public float mulletPositionTreshold = 0.3f;
 }
