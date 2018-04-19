@@ -9,4 +9,7 @@ public class GameSettings : MonoBehaviour {
 
 	[Range (0, 1)]
 	public float mulletPositionTreshold = 0.3f;
+
+	[Range (1, 10)]
+	public float accelerationForce = 1f;
 }

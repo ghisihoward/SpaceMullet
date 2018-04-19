@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour {
-
+	
 	private enum GameState { Menu, Ready, Playing, Paused, GameOver }
-
 	private GameState currentState = GameState.Menu;
 	private GameObject player, pauseMenu;
 	private Vector3 initialPos;
@@ -26,7 +25,6 @@ public class GameManager : MonoBehaviour {
 		} else {
 			Time.timeScale = 1f;
 		}
-
 		// TODO
 		// Verify if player is out of camera bounds.
 	}
@@ -46,6 +44,12 @@ public class GameManager : MonoBehaviour {
 			player.GetComponent<Rigidbody2D> ().AddForce (force);
 			currentState = GameState.Playing;
 		}		
+	}
+
+	public void PushPlayer(Vector2 force){
+		if (currentState == GameState.Playing) {
+			player.GetComponent<Rigidbody2D> ().AddForce (force);
+		}
 	}
 
 	public void PlayerCollision () { 

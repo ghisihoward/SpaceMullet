@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class InputManager : MonoBehaviour {
 
-
 	private GameObject gameManager;
+	private GameSettings gameSettings;
 	private Vector2 mousePressed, mouseReleased;
 
 	private float posY;
@@ -19,13 +19,22 @@ public class InputManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		gameManager = GameObject.FindGameObjectWithTag ("GameManager");
+		gameSettings = GameObject.FindGameObjectWithTag ("GameSettings").GetComponent <GameSettings> ();
 		mousePressed = new Vector2 ();
 		mouseReleased = new Vector2 ();
 	}
 	
 	// Update is called once per frame
 	void Update () {
+		if (Input.GetMouseButton (0)) {
+			if ((Input.mousePosition).x > Screen.width/2){
+				gameManager.GetComponent<GameManager> ().PushPlayer (new Vector2 (1, 1));
 
+			}
+			else if ((Input.mousePosition).x < Screen.width/2){
+				gameManager.GetComponent<GameManager> ().PushPlayer (new Vector2 (-1,1));
+			} 
+		}
 		if (Input.GetMouseButtonDown (0)) {
 			mousePressed = CastRayToClick (Input.mousePosition.x, Input.mousePosition.y);
 			initialTime = Time.time;
@@ -46,7 +55,12 @@ public class InputManager : MonoBehaviour {
 				// Review Math
 
 				if (posDeltaPositive > 0.02 && posDeltaNegative > 0.02) {
-					gameManager.GetComponent<GameManager> ().VerticalSwipe (new Vector2 ((mouseDeltaX * 50) / swipeInterval, (mouseDeltaY * 50) / swipeInterval));
+					gameManager.GetComponent<GameManager> ().VerticalSwipe (
+						new Vector2 (
+							(mouseDeltaX * 50 * gameSettings.accelerationForce) / swipeInterval, 
+							(mouseDeltaY * 50 * gameSettings.accelerationForce) / swipeInterval
+						)
+					);
 				}
 			}
 		}
