@@ -53,6 +53,12 @@ public class GameManager : MonoBehaviour {
 		}		
 	}
 
+	public void PushPlayer(Vector2 force){
+		if (currentState == GameState.Playing) {
+			player.GetComponent<Rigidbody2D> ().AddForce (force);
+		}
+	}
+
 	public void PlayerCollision () { 
 		currentState = GameState.GameOver;
 		pauseMenu.SetActive (true);

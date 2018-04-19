@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class InputManager : MonoBehaviour {
 
-
 	private GameObject gameManager;
 	private Vector2 mousePressed, mouseReleased;
 
@@ -25,7 +24,17 @@ public class InputManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		if (Input.GetMouseButton (0)) {
+			if ((Input.mousePosition).x > Screen.width/2){
+				Debug.Log("Right");
+				gameManager.GetComponent<GameManager> ().PushPlayer (new Vector2 (1, 1));
 
+			}
+			else if ((Input.mousePosition).x < Screen.width/2){
+				Debug.Log ("Left");
+				gameManager.GetComponent<GameManager> ().PushPlayer (new Vector2 (-1,1));
+			} 
+		}
 		if (Input.GetMouseButtonDown (0)) {
 			mousePressed = CastRayToClick (Input.mousePosition.x, Input.mousePosition.y);
 			initialTime = Time.time;
