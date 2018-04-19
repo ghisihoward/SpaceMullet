@@ -4,13 +4,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour {
 
-	private enum GameState {
-		Menu,
-		Ready,
-		Playing,
-		Paused,
-		GameOver
-	}
+	private enum GameState { Menu, Ready, Playing, Paused, GameOver }
 
 	private GameState currentState = GameState.Menu;
 	private GameObject player, pauseMenu;
@@ -23,13 +17,14 @@ public class GameManager : MonoBehaviour {
 	}
 
 	void Update () {
-		switch (currentState) {
-			case GameState.Paused:
-			// do stuff
-				break;
-			case GameState.Playing:
-			// do stuff
-				break;
+		if (
+			currentState == GameState.Menu ||
+			currentState == GameState.Paused ||
+			currentState == GameState.GameOver
+		) {
+			Time.timeScale = 0f;
+		} else {
+			Time.timeScale = 1f;
 		}
 
 		// TODO
@@ -64,11 +59,7 @@ public class GameManager : MonoBehaviour {
 		} else if (currentState == GameState.Paused) {
 			currentState = GameState.Playing;
 		} else if (currentState == GameState.GameOver) {
-			player.transform.position = initialPos;
-			player.transform.rotation = Quaternion.identity;
-			player.GetComponent<Rigidbody2D> ().velocity.Set (0, 0);
-			player.GetComponent<Rigidbody2D> ().angularVelocity = 0;
-			currentState = GameState.Ready;
+			this.resetPlayer ();
 		}
 		pauseMenu.SetActive (false);
 	}
@@ -78,5 +69,15 @@ public class GameManager : MonoBehaviour {
 			currentState = GameState.Paused;
 			pauseMenu.SetActive (true);	
 		}
+	}
+
+	public void resetPlayer() {
+		player.SetActive (false);
+		player.transform.position = initialPos;
+		player.transform.rotation = Quaternion.identity;
+		player.GetComponent<Rigidbody2D> ().velocity = new Vector2 (0f, 0f);
+		player.GetComponent<Rigidbody2D> ().angularVelocity = 0f;
+		player.SetActive (true);
+		currentState = GameState.Ready;
 	}
 }
