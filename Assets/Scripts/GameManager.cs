@@ -11,7 +11,6 @@ public class GameManager : MonoBehaviour {
 		Paused,
 		GameOver
 	}
-
 	private GameState currentState = GameState.Menu;
 	private GameObject player, pauseMenu;
 	private Vector3 initialPos;
@@ -31,7 +30,6 @@ public class GameManager : MonoBehaviour {
 			// do stuff
 				break;
 		}
-
 		// TODO
 		// Verify if player is out of camera bounds.
 	}

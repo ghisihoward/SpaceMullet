@@ -26,12 +26,10 @@ public class InputManager : MonoBehaviour {
 	void Update () {
 		if (Input.GetMouseButton (0)) {
 			if ((Input.mousePosition).x > Screen.width/2){
-				Debug.Log("Right");
 				gameManager.GetComponent<GameManager> ().PushPlayer (new Vector2 (1, 1));
 
 			}
 			else if ((Input.mousePosition).x < Screen.width/2){
-				Debug.Log ("Left");
 				gameManager.GetComponent<GameManager> ().PushPlayer (new Vector2 (-1,1));
 			} 
 		}
