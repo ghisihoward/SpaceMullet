@@ -5,6 +5,7 @@ using UnityEngine;
 public class InputManager : MonoBehaviour {
 
 	private GameObject gameManager;
+	private GameSettings gameSettings;
 	private Vector2 mousePressed, mouseReleased;
 
 	private float posY;
@@ -18,6 +19,7 @@ public class InputManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		gameManager = GameObject.FindGameObjectWithTag ("GameManager");
+		gameSettings = GameObject.FindGameObjectWithTag ("GameSettings").GetComponent <GameSettings> ();
 		mousePressed = new Vector2 ();
 		mouseReleased = new Vector2 ();
 	}
@@ -53,7 +55,12 @@ public class InputManager : MonoBehaviour {
 				// Review Math
 
 				if (posDeltaPositive > 0.02 && posDeltaNegative > 0.02) {
-					gameManager.GetComponent<GameManager> ().VerticalSwipe (new Vector2 ((mouseDeltaX * 50) / swipeInterval, (mouseDeltaY * 50) / swipeInterval));
+					gameManager.GetComponent<GameManager> ().VerticalSwipe (
+						new Vector2 (
+							(mouseDeltaX * 50 * gameSettings.accelerationForce) / swipeInterval, 
+							(mouseDeltaY * 50 * gameSettings.accelerationForce) / swipeInterval
+						)
+					);
 				}
 			}
 		}
