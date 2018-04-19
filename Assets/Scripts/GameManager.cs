@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour {
 
 	//GAME STATES
-	private enum GameState {Menu, Ready, Playing, Paused, GameOver}
+	private enum GameState { Menu, Ready, Playing, Paused, GameOver }
 	private GameState currentState = GameState.Menu;
 	private GameObject player, pauseMenu, textTime;
 	private Vector3 initialPos;
@@ -54,6 +54,12 @@ public class GameManager : MonoBehaviour {
 		}		
 	}
 
+	public void PushPlayer(Vector2 force){
+		if (currentState == GameState.Playing) {
+			player.GetComponent<Rigidbody2D> ().AddForce (force);
+		}
+	}
+
 	public void PlayerCollision () { 
 		currentState = GameState.GameOver;
 		pauseMenu.SetActive (true);
@@ -65,11 +71,7 @@ public class GameManager : MonoBehaviour {
 		} else if (currentState == GameState.Paused) {
 			currentState = GameState.Playing;
 		} else if (currentState == GameState.GameOver) {
-			player.transform.position = initialPos;
-			player.transform.rotation = Quaternion.identity;
-			player.GetComponent<Rigidbody2D> ().velocity.Set (0, 0);
-			player.GetComponent<Rigidbody2D> ().angularVelocity = 0;
-			currentState = GameState.Ready;
+			this.resetPlayer ();
 		}
 		pauseMenu.SetActive (false);
 	}
@@ -81,6 +83,7 @@ public class GameManager : MonoBehaviour {
 			Time.timeScale = 0;
 		}
 	}
+
 	public void UpdateUI () {
 		distance = player.transform.position.y - initialPos.y;
 		secondsCount += Time.deltaTime;
@@ -98,5 +101,15 @@ public class GameManager : MonoBehaviour {
 			Mathf.Floor (secondsCount / 60), 
 			secondsCount % 60
 		);
+	}
+
+	public void resetPlayer() {
+		player.SetActive (false);
+		player.transform.position = initialPos;
+		player.transform.rotation = Quaternion.identity;
+		player.GetComponent<Rigidbody2D> ().velocity = new Vector2 (0f, 0f);
+		player.GetComponent<Rigidbody2D> ().angularVelocity = 0f;
+		player.SetActive (true);
+		currentState = GameState.Ready;
 	}
 }
