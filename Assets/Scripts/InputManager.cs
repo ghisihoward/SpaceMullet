@@ -11,7 +11,6 @@ public class InputManager : MonoBehaviour {
 	private float posY;
 	private float mouseDeltaX = 0f;
 	private float mouseDeltaY = 0f;
-	private float mulletAngle = 0f;
 	private float initialTime = 0f;
 	private float swipeInterval = 0f;
 	private float posDeltaPositive = 0f;
