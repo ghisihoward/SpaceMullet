@@ -206,6 +206,21 @@ Prefab:
       propertyPath: m_TagString
       value: GameManager
       objectReference: {fileID: 0}
+    - target: {fileID: 114901900626411514, guid: fbdbadff7972d7a499a177ced8307137,
+        type: 2}
+      propertyPath: timerText
+      value: 
+      objectReference: {fileID: 82434630}
+    - target: {fileID: 114901900626411514, guid: fbdbadff7972d7a499a177ced8307137,
+        type: 2}
+      propertyPath: meters
+      value: 
+      objectReference: {fileID: 1956023075}
+    - target: {fileID: 114901900626411514, guid: fbdbadff7972d7a499a177ced8307137,
+        type: 2}
+      propertyPath: metersText
+      value: 
+      objectReference: {fileID: 1956023075}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fbdbadff7972d7a499a177ced8307137, type: 2}
   m_IsPrefabParent: 0
