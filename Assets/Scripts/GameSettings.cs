@@ -12,4 +12,7 @@ public class GameSettings : MonoBehaviour {
 
 	[Range (1, 10)]
 	public float accelerationForce = 1f;
+
+	public enum InputType { RotateLocal, PushHorizontal }
+	public InputType currentInputType = InputType.RotateLocal;
 }

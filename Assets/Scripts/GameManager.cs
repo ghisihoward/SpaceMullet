@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour {
 	private GameState currentState = GameState.Menu;
 	private GameObject player, pauseMenu, textTime;
 	private Vector3 initialPos;
+	private GameSettings gameSettings;
 
 	//TIMER
 	public Text timerText, metersText;
@@ -18,6 +19,7 @@ public class GameManager : MonoBehaviour {
 	void Start () {
 		player = GameObject.FindGameObjectWithTag ("Player");
 		pauseMenu = GameObject.FindGameObjectWithTag ("PauseMenu");
+		gameSettings = GameObject.FindGameObjectWithTag ("GameSettings").GetComponent<GameSettings>();
 		initialPos = player.transform.position;
 	}
 
@@ -54,9 +56,16 @@ public class GameManager : MonoBehaviour {
 		}		
 	}
 
-	public void PushPlayer(Vector2 force){
-		if (currentState == GameState.Playing) {
-			player.GetComponent<Rigidbody2D> ().AddForce (force);
+	public void PushPlayer(Vector2 dir,float force){
+		if (currentState == GameState.Playing){
+			if (gameSettings.currentInputType == GameSettings.InputType.RotateLocal) {
+				Vector2 resultForce = player.transform.rotation * dir * force;
+				player.GetComponent<Rigidbody2D> ().AddForce (resultForce);
+			} 
+			else {
+				Vector2 resultForce = dir * force;
+				player.GetComponent<Rigidbody2D> ().AddForce (resultForce);
+			}
 		}
 	}
 
