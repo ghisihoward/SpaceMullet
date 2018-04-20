@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour {
 	private GameObject player, pauseMenu, textTime;
 	private Vector3 initialPos;
 	private GameSettings gameSettings;
+	private Camera mainCamera;
 
 	//TIMER
 	public Text timerText, metersText;
@@ -36,7 +37,13 @@ public class GameManager : MonoBehaviour {
 		}
 
 		UpdateUI ();
-		// Verify if player is out of camera bounds.
+		Debug.Log (Blitzkrieg.GetGameObjectPosition(player).y);
+		if (Blitzkrieg.GetGameObjectPosition(player).y < -0.009) {
+			currentState = GameState.GameOver;
+			pauseMenu.SetActive (true);
+
+		}
+
 	} 
 	
 	public void VerticalSwipe (float swipeMagnitude) {
