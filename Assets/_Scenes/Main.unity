@@ -77,18 +77,15 @@ LightmapSettings:
     m_PVRDirectSampleCount: 32
     m_PVRSampleCount: 500
     m_PVRBounces: 2
-    m_PVRFilterTypeDirect: 0
-    m_PVRFilterTypeIndirect: 0
-    m_PVRFilterTypeAO: 0
+    m_PVRFiltering: 0
     m_PVRFilteringMode: 1
     m_PVRCulling: 1
     m_PVRFilteringGaussRadiusDirect: 1
     m_PVRFilteringGaussRadiusIndirect: 5
     m_PVRFilteringGaussRadiusAO: 2
-    m_PVRFilteringAtrousPositionSigmaDirect: 0.5
-    m_PVRFilteringAtrousPositionSigmaIndirect: 2
-    m_PVRFilteringAtrousPositionSigmaAO: 1
-    m_ShowResolutionOverlay: 1
+    m_PVRFilteringAtrousColorSigma: 1
+    m_PVRFilteringAtrousNormalSigma: 1
+    m_PVRFilteringAtrousPositionSigma: 1
   m_LightingDataAsset: {fileID: 0}
   m_UseShadowmask: 1
 --- !u!196 &4
@@ -110,8 +107,6 @@ NavMeshSettings:
     manualTileSize: 0
     tileSize: 256
     accuratePlacement: 0
-    debug:
-      m_Flags: 0
   m_NavMeshData: {fileID: 0}
 --- !u!1001 &28751647
 Prefab:
@@ -151,19 +146,6 @@ Prefab:
     - target: {fileID: 4945108297953772, guid: f0d52d29079681a4d9bdbf58930ab7d8, type: 2}
       propertyPath: m_RootOrder
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4919010720210170, guid: f0d52d29079681a4d9bdbf58930ab7d8, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 190
-      objectReference: {fileID: 0}
-    - target: {fileID: 4817156479171250, guid: f0d52d29079681a4d9bdbf58930ab7d8, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 200
-      objectReference: {fileID: 0}
-    - target: {fileID: 20128898024430666, guid: f0d52d29079681a4d9bdbf58930ab7d8,
-        type: 2}
-      propertyPath: far clip plane
-      value: 400
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f0d52d29079681a4d9bdbf58930ab7d8, type: 2}
@@ -207,20 +189,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 1308804303868272, guid: fbdbadff7972d7a499a177ced8307137, type: 2}
-      propertyPath: m_TagString
-      value: GameManager
-      objectReference: {fileID: 0}
     - target: {fileID: 114901900626411514, guid: fbdbadff7972d7a499a177ced8307137,
         type: 2}
       propertyPath: timerText
       value: 
       objectReference: {fileID: 82434630}
-    - target: {fileID: 114901900626411514, guid: fbdbadff7972d7a499a177ced8307137,
-        type: 2}
-      propertyPath: meters
-      value: 
-      objectReference: {fileID: 1956023075}
     - target: {fileID: 114901900626411514, guid: fbdbadff7972d7a499a177ced8307137,
         type: 2}
       propertyPath: metersText
@@ -450,14 +423,6 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4305375937173978, guid: bf27a3713c5f12f44b9ca3cfd533d51d, type: 2}
       propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4305375937173978, guid: bf27a3713c5f12f44b9ca3cfd533d51d, type: 2}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4305375937173978, guid: bf27a3713c5f12f44b9ca3cfd533d51d, type: 2}
-      propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -984,7 +949,6 @@ LineRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
   m_MotionVectors: 0
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
@@ -1000,7 +964,6 @@ LineRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
