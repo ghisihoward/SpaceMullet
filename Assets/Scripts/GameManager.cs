@@ -8,9 +8,8 @@ public class GameManager : MonoBehaviour {
 	private enum GameState { Menu, Ready, Playing, Paused, GameOver }
 	private GameState currentState = GameState.Menu;
 	private GameObject player, pauseMenu, textTime;
-	private Vector3 initialPos;
 	private GameSettings gameSettings;
-	private Camera mainCamera;
+	private Vector3 playerInitialPos, cameraInitialPos;
 
 	//TIMER
 	public Text timerText, metersText;
@@ -21,9 +20,9 @@ public class GameManager : MonoBehaviour {
 		player = GameObject.FindGameObjectWithTag ("Player");
 		pauseMenu = GameObject.FindGameObjectWithTag ("PauseMenu");
 		gameSettings = GameObject.FindGameObjectWithTag ("GameSettings").GetComponent<GameSettings>();
-		initialPos = player.transform.position;
+		playerInitialPos = player.transform.position;
+		cameraInitialPos = Camera.main.transform.position;
 	}
-
 
 	void Update () {
 		if (
@@ -41,67 +40,11 @@ public class GameManager : MonoBehaviour {
 		if (Blitzkrieg.GetGameObjectPosition(player).y < -0.009) {
 			currentState = GameState.GameOver;
 			pauseMenu.SetActive (true);
-
 		}
-
 	} 
-	
-	public void VerticalSwipe (float swipeMagnitude) {
-		if (currentState == GameState.Paused) {
-			// TODO Review Math
-			Vector3 forceVector = new Vector3 (0, 1 * swipeMagnitude, 0);
-			player.GetComponent<Rigidbody2D> ().AddForce (forceVector);
-			currentState = GameState.Playing;
-		}		
-	}
-
-	public void VerticalSwipe (Vector2 force) {
-		if (currentState == GameState.Ready) {
-			// TODO Review Math
-			player.GetComponent<Rigidbody2D> ().AddForce (force);
-			currentState = GameState.Playing;
-		}		
-	}
-
-	public void PushPlayer(Vector2 dir,float force){
-		if (currentState == GameState.Playing){
-			if (gameSettings.currentInputType == GameSettings.InputType.RotateLocal) {
-				Vector2 resultForce = player.transform.rotation * dir * force;
-				player.GetComponent<Rigidbody2D> ().AddForce (resultForce);
-			} 
-			else {
-				Vector2 resultForce = dir * force;
-				player.GetComponent<Rigidbody2D> ().AddForce (resultForce);
-			}
-		}
-	}
-
-	public void PlayerCollision () { 
-		currentState = GameState.GameOver;
-		pauseMenu.SetActive (true);
-	}
-
-	public void PlayButton () {
-		if (currentState == GameState.Menu) {
-			currentState = GameState.Ready;
-		} else if (currentState == GameState.Paused) {
-			currentState = GameState.Playing;
-		} else if (currentState == GameState.GameOver) {
-			this.resetPlayer ();
-		}
-		pauseMenu.SetActive (false);
-	}
-
-	public void PauseButton () {
-		if (currentState == GameState.Playing) {
-			currentState = GameState.Paused;
-			pauseMenu.SetActive (true);
-			Time.timeScale = 0;
-		}
-	}
 
 	public void UpdateUI () {
-		distance = player.transform.position.y - initialPos.y;
+		distance = player.transform.position.y - playerInitialPos.y;
 		secondsCount += Time.deltaTime;
 
 		if (secondsCount >= 60) {
@@ -119,13 +62,70 @@ public class GameManager : MonoBehaviour {
 		);
 	}
 
-	public void resetPlayer() {
+	public void PlayerCollision () { 
+		currentState = GameState.GameOver;
+		pauseMenu.SetActive (true);
+	}
+
+	public void VerticalSwipe (float swipeMagnitude) {
+		if (currentState == GameState.Ready) {
+			// TODO Review Math
+			Vector3 forceVector = new Vector3 (0, 1 * swipeMagnitude, 0);
+			player.GetComponent<Rigidbody2D> ().AddForce (forceVector);
+			currentState = GameState.Playing;
+		}		
+	}
+
+	public void VerticalSwipe (Vector2 force) {
+		if (currentState == GameState.Ready) {
+			// TODO Review Math
+			player.GetComponent<Rigidbody2D> ().AddForce (force);
+			currentState = GameState.Playing;
+		}		
+	}
+
+	public void PushPlayer(Vector2 dir, float force){
+		if (currentState == GameState.Playing) {
+			if (gameSettings.currentInputType == GameSettings.InputType.RotateLocal) {
+				Vector2 resultForce = player.transform.rotation * dir * force;
+				player.GetComponent<Rigidbody2D> ().AddForce (resultForce);
+			} else {
+				Vector2 resultForce = dir * force;
+				player.GetComponent<Rigidbody2D> ().AddForce (resultForce);
+			}
+		}
+	}
+
+	public void PlayButton () {
+		if (currentState == GameState.Menu) {
+			currentState = GameState.Ready;
+		} else if (currentState == GameState.Paused) {
+			currentState = GameState.Playing;
+		} else if (currentState == GameState.GameOver) {
+			this.resetPlayer ();
+			this.resetCamera ();
+		}
+		pauseMenu.SetActive (false);
+	}
+
+	public void PauseButton () {
+		if (currentState == GameState.Playing) {
+			currentState = GameState.Paused;
+			pauseMenu.SetActive (true);
+		}
+	}
+
+	public void resetPlayer () {
 		player.SetActive (false);
-		player.transform.position = initialPos;
+		player.transform.position = playerInitialPos;
 		player.transform.rotation = Quaternion.identity;
 		player.GetComponent<Rigidbody2D> ().velocity = new Vector2 (0f, 0f);
 		player.GetComponent<Rigidbody2D> ().angularVelocity = 0f;
 		player.SetActive (true);
 		currentState = GameState.Ready;
+	}
+
+	public void resetCamera () {
+		Camera.main.transform.position = cameraInitialPos;
 	}
 }
