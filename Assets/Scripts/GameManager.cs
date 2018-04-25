@@ -37,7 +37,7 @@ public class GameManager : MonoBehaviour {
 		}
 
 		UpdateUI ();
-		Debug.Log (Blitzkrieg.GetGameObjectPosition(player).y);
+
 		if (Blitzkrieg.GetGameObjectPosition(player).y < -0.009) {
 			currentState = GameState.GameOver;
 			pauseMenu.SetActive (true);
