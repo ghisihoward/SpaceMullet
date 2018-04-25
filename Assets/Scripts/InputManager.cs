@@ -8,15 +8,10 @@ public class InputManager : MonoBehaviour {
 	private GameSettings gameSettings;
 	private Vector2 mousePressed, mouseReleased;
 
-	private float posY;
-	private float mouseDeltaX = 0f;
-	private float mouseDeltaY = 0f;
-	private float initialTime = 0f;
-	private float swipeInterval = 0f;
-	private float posDeltaPositive = 0f;
-	private float posDeltaNegative = 0f;
+	private float mouseDeltaX = 0f, mouseDeltaY = 0f;
+	private float posDeltaPositive = 0f, posDeltaNegative = 0f;
+	private float swipeStart = 0f, swipeInterval = 0f;
 
-	// Use this for initialization
 	void Start () {
 		gameManager = GameObject.FindGameObjectWithTag ("GameManager");
 		gameSettings = GameObject.FindGameObjectWithTag ("GameSettings").GetComponent <GameSettings> ();
@@ -24,7 +19,6 @@ public class InputManager : MonoBehaviour {
 		mouseReleased = new Vector2 ();
 	}
 	
-	// Update is called once per frame
 	void Update () {
 		if (Input.GetMouseButton (0)) {
 			if ((Input.mousePosition).x > Screen.width/2){
@@ -35,9 +29,10 @@ public class InputManager : MonoBehaviour {
 				gameManager.GetComponent<GameManager> ().PushPlayer (Vector2.left, 1.0f);
 			} 
 		}
+
 		if (Input.GetMouseButtonDown (0)) {
 			mousePressed = CastRayToClick (Input.mousePosition.x, Input.mousePosition.y);
-			initialTime = Time.time;
+			swipeStart = Time.time;
 		}
 
 		if (Input.GetMouseButtonUp (0)) {
@@ -48,12 +43,11 @@ public class InputManager : MonoBehaviour {
 			posDeltaPositive = mouseDeltaY - mouseDeltaX;
 			posDeltaNegative = mouseDeltaY + mouseDeltaX;
 
-			swipeInterval = Time.time - initialTime;
+			swipeInterval = Time.time - swipeStart;
 
 			if (mouseDeltaY > 0) {
 				// TODO
 				// Review Math
-
 				if (posDeltaPositive > 0.02 && posDeltaNegative > 0.02) {
 					gameManager.GetComponent<GameManager> ().VerticalSwipe (
 						new Vector2 (
@@ -63,6 +57,10 @@ public class InputManager : MonoBehaviour {
 					);
 				}
 			}
+		}
+
+		if (gameSettings.devMode && Input.GetKeyDown (KeyCode.K)) {
+			gameManager.GetComponent<GameManager> ().PlayerCollision ();
 		}
 	}
 

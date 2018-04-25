@@ -14,5 +14,4 @@ public class PlanetOrbit : MonoBehaviour {
 		if (coll.gameObject.tag == "Player")
 			planet.GetComponent<Planet> ().SomethingInOrbit (coll.gameObject);
 	}
-
 }

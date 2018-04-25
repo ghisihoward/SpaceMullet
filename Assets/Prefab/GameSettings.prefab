@@ -54,3 +54,5 @@ MonoBehaviour:
   mulletMass: 1
   mulletPositionTreshold: 0.3
   accelerationForce: 1
+  devMode: 1
+  currentInputType: 0

@@ -6,13 +6,11 @@ public class Player : MonoBehaviour {
 
 	private GameObject gameManager;
 
-	// Use this for initialization
 	void Start () {
 		gameManager = GameObject.FindGameObjectWithTag ("GameManager");
 	}
 
 	void Update(){
-
 		Vector2 velocityVector = this.GetComponent<Rigidbody2D> ().velocity;
 		if (velocityVector != Vector2.zero) {
 			float angle = Mathf.Atan2 (velocityVector.y, velocityVector.x) * Mathf.Rad2Deg - 90.0f;

@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class OffsetScroller : MonoBehaviour {
 
-	public Vector2 inputVector;
 	public float speedModifier;
-	private Rigidbody2D mulletBody;
+	public Vector2 inputVector;
 	public Material newMaterial;
+	private Rigidbody2D mulletBody;
 
 	void Start () {
 		mulletBody = GameObject.FindGameObjectWithTag ("Player").GetComponent<Rigidbody2D> ();
@@ -15,7 +15,6 @@ public class OffsetScroller : MonoBehaviour {
 		GetComponent<MeshRenderer> ().material = newMaterial;
 	}
 
-	// Update is called once per frame
 	void Update () {
 		inputVector = mulletBody.velocity;
 

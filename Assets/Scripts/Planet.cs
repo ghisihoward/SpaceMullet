@@ -4,14 +4,12 @@ using UnityEngine;
 
 public class Planet : MonoBehaviour {
 
-	//variables
-	public float varGravitation = 1f;
+	public float gravitationForce;
 	private GameObject planetCore;
 	private GameObject gameSettings;
-
+	private float magnitude, mulletMass;
 
 	void Start () {
-
 		planetCore = transform.Find ("Core").gameObject;
 		gameSettings = GameObject.Find ("GameSettings").gameObject;
 	}
@@ -20,12 +18,12 @@ public class Planet : MonoBehaviour {
 		Vector2 distance = planetCore.transform.position - bodyInOrbit.transform.position;
 		Vector2 direction = distance;
 
-		float magnitude = distance.sqrMagnitude;
+		Rigidbody2D bodyRb = bodyInOrbit.GetComponent<Rigidbody2D> ();
+		mulletMass = gameSettings.GetComponent<GameSettings> ().mulletMass;
+
+		magnitude = distance.sqrMagnitude;
 		direction.Normalize();
 
-		Rigidbody2D bodyRb = bodyInOrbit.GetComponent<Rigidbody2D> ();
-		float mulletMass = gameSettings.GetComponent<GameSettings> ().mulletMass;
-
-		bodyRb.AddForce (direction * mulletMass * varGravitation / magnitude);
+		bodyRb.AddForce (direction * mulletMass * gravitationForce / magnitude);
 	}
 }

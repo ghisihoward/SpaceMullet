@@ -4,22 +4,28 @@ using UnityEngine;
 using UnityEngine.UI;
 public class GameManager : MonoBehaviour {
 
-	//GAME STATES
+	// GAME STATES
 	private enum GameState { Menu, Ready, Playing, Paused, GameOver }
 	private GameState currentState = GameState.Menu;
-	private GameObject player, pauseMenu, textTime;
-	private GameSettings gameSettings;
-	private Vector3 playerInitialPos, cameraInitialPos;
 
-	//TIMER
-	public Text timerText, metersText;
+	// TIMER
+	private Text timerText, metersText;
 	private float secondsCount = 0f, distance = 0f;
 	private int minuteCount = 0;
 
+	// GAME OBJECTS
+	private GameObject player, pauseMenu;
+	private GameSettings gameSettings;
+	private Vector3 playerInitialPos, cameraInitialPos;
+
+
 	void Start () {
+		timerText = GameObject.Find ("TextBox_Time").GetComponent<Text> ();
+		metersText = GameObject.Find ("TextBox_Distance").GetComponent<Text> ();
+
 		player = GameObject.FindGameObjectWithTag ("Player");
 		pauseMenu = GameObject.FindGameObjectWithTag ("PauseMenu");
-		gameSettings = GameObject.FindGameObjectWithTag ("GameSettings").GetComponent<GameSettings>();
+		gameSettings = GameObject.FindGameObjectWithTag ("GameSettings").GetComponent<GameSettings> ();
 		playerInitialPos = player.transform.position;
 		cameraInitialPos = Camera.main.transform.position;
 	}
