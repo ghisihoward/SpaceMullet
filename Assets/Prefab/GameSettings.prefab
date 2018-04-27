@@ -54,5 +54,11 @@ MonoBehaviour:
   mulletMass: 1
   mulletPositionTreshold: 0.3
   accelerationForce: 1
+  minGrav: 2
+  maxGrav: 10
+  minOrbit: 15
+  maxOrbit: 30
+  minScale: 1
+  maxScale: 2
   devMode: 1
   currentInputType: 0

@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour {
 
 	// GAME OBJECTS
 	private GameObject player, pauseMenu;
+	private LevelManager levelManager;
 	private GameSettings gameSettings;
 	private Vector3 playerInitialPos, cameraInitialPos;
 
@@ -26,6 +27,8 @@ public class GameManager : MonoBehaviour {
 		player = GameObject.FindGameObjectWithTag ("Player");
 		pauseMenu = GameObject.FindGameObjectWithTag ("PauseMenu");
 		gameSettings = GameObject.FindGameObjectWithTag ("GameSettings").GetComponent<GameSettings> ();
+		levelManager = GameObject.FindGameObjectWithTag ("LevelManager").GetComponent<LevelManager> ();
+
 		playerInitialPos = player.transform.position;
 		cameraInitialPos = Camera.main.transform.position;
 	}
@@ -105,9 +108,11 @@ public class GameManager : MonoBehaviour {
 	public void PlayButton () {
 		if (currentState == GameState.Menu) {
 			currentState = GameState.Ready;
+			levelManager.GenerateLevel ();
 		} else if (currentState == GameState.Paused) {
 			currentState = GameState.Playing;
 		} else if (currentState == GameState.GameOver) {
+			levelManager.GenerateLevel ();
 			this.resetPlayer ();
 			this.resetCamera ();
 		}
