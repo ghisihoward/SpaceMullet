@@ -14,10 +14,8 @@ public class CameraController : MonoBehaviour {
 	}
 
 	void Update () {
-		// TODO
-		// Doesn't set the position if the initial player Y is bigger than the treshold.
-
-		if ((Blitzkrieg.GetGameObjectPosition (player).y > gameSettings.mulletPositionTreshold) && 
+		if (
+			(Blitzkrieg.GetGameObjectPosition (player).y > gameSettings.mulletPositionTreshold) && 
 			(player.transform.position.y > lastPlayerY)
 		){
 			transform.position = transform.position + new Vector3 (0, player.transform.position.y - lastPlayerY, 0);

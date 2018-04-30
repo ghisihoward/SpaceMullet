@@ -8,6 +8,8 @@ TagManager:
   - PlanetCore
   - PauseMenu
   - GameSettings
+  - GameWorld
+  - LevelManager
   layers:
   - Default
   - TransparentFX

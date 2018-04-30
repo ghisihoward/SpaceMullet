@@ -247,8 +247,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5d101e2d2eac4e40b32bb64d9eae185, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputVector: {x: 0.5, y: 1}
   speedModifier: 0.002
+  inputVector: {x: 0.5, y: 1}
+  newMaterial: {fileID: 0}
 --- !u!114 &114158580182926454
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -260,8 +261,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5d101e2d2eac4e40b32bb64d9eae185, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputVector: {x: 0.5, y: 1}
   speedModifier: 0.006
+  inputVector: {x: 0.5, y: 1}
+  newMaterial: {fileID: 0}
 --- !u!114 &114638325647858054
 MonoBehaviour:
   m_ObjectHideFlags: 1

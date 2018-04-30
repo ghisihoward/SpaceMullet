@@ -15,4 +15,7 @@ public class PlanetOrbit : MonoBehaviour {
 			planet.GetComponent<Planet> ().SomethingInOrbit (coll.gameObject);
 	}
 
+	public void SetOrbit (float newO) {
+		GetComponent<CircleCollider2D> ().transform.localScale = new Vector3 (newO, newO, 1);
+	}
 }
