@@ -56,9 +56,13 @@ MonoBehaviour:
   accelerationForce: 1
   minGrav: 2
   maxGrav: 10
-  minOrbit: 15
-  maxOrbit: 30
-  minScale: 1
-  maxScale: 2
+  minOrbit: 2
+  maxOrbit: 10
+  minScale: 2
+  maxScale: 9
   devMode: 1
   currentInputType: 0
+  mulletSpriteAstronaut: {fileID: 21300000, guid: a52519d2a08d6cd469d3266e0353505b,
+    type: 3}
+  mulletSpriteCosmonaut: {fileID: 21300000, guid: 84bf9f94b9ab2d441acf775b0d458a3a,
+    type: 3}

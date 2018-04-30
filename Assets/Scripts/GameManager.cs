@@ -19,6 +19,9 @@ public class GameManager : MonoBehaviour {
 	private GameSettings gameSettings;
 	private Vector3 playerInitialPos, cameraInitialPos;
 
+	// EASTER EGGS
+	private bool motherland = false;
+
 
 	void Start () {
 		timerText = GameObject.Find ("TextBox_Time").GetComponent<Text> ();
@@ -116,6 +119,7 @@ public class GameManager : MonoBehaviour {
 			this.resetPlayer ();
 			this.resetCamera ();
 		}
+
 		pauseMenu.SetActive (false);
 	}
 
@@ -138,5 +142,15 @@ public class GameManager : MonoBehaviour {
 
 	public void resetCamera () {
 		Camera.main.transform.position = cameraInitialPos;
+	}
+
+	public void SovietSpaceProgram () {
+		if (!motherland) {
+			player.transform.Find ("PlayerSprite").GetComponent<SpriteRenderer> ().sprite = gameSettings.mulletSpriteCosmonaut;
+			motherland = true;
+		} else {
+			player.transform.Find ("PlayerSprite").GetComponent<SpriteRenderer> ().sprite = gameSettings.mulletSpriteAstronaut;
+			motherland = false;
+		}
 	}
 }
