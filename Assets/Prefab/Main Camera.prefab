@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 23200618137146874}
   - component: {fileID: 114110163010422980}
   m_Layer: 0
-  m_Name: ScrollingBackground_A
+  m_Name: ScrollingBackground_B
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 23227266716598618}
   - component: {fileID: 114158580182926454}
   m_Layer: 0
-  m_Name: ScrollingBackground_B
+  m_Name: ScrollingBackground_A
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -74,11 +74,11 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1637898376199990}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.25, y: 0.25, z: 200}
+  m_LocalPosition: {x: 0.25, y: 0.25, z: 120}
   m_LocalScale: {x: 13, y: 13, z: 13}
   m_Children: []
   m_Father: {fileID: 4945108297953772}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4919010720210170
 Transform:
@@ -87,11 +87,11 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1736161480077368}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.25, y: 0.25, z: 190}
+  m_LocalPosition: {x: 0.25, y: 0.25, z: 119}
   m_LocalScale: {x: 13, y: 13, z: 13}
   m_Children: []
   m_Father: {fileID: 4945108297953772}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4945108297953772
 Transform:
@@ -103,8 +103,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 4817156479171250}
   - {fileID: 4919010720210170}
+  - {fileID: 4817156479171250}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

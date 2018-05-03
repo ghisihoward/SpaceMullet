@@ -60,7 +60,10 @@ MonoBehaviour:
   maxOrbit: 10
   minScale: 2
   maxScale: 9
+  minimumPlanetOffsetFromPlayer: 1
+  maximumPlanetOffsetFromPlayer: 10
   devMode: 1
+  testNewGenerator: 1
   currentInputType: 0
   mulletSpriteAstronaut: {fileID: 21300000, guid: a52519d2a08d6cd469d3266e0353505b,
     type: 3}

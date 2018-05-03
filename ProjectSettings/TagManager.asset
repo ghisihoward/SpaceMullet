@@ -11,6 +11,9 @@ TagManager:
   - GameWorld
   - LevelManager
   - Water
+  - Canvas
+  - Sector
+  - SectorCollider
   layers:
   - Default
   - TransparentFX
