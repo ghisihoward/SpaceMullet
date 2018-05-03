@@ -31,10 +31,18 @@ public class GameSettings : MonoBehaviour {
 	[Range (1, 10)]
 	public float maxScale = 2;
 
-	public bool devMode;
+	[Range (1, 3)]
+	public float minimumPlanetOffsetFromPlayer = 3;
+
+	[Range (5, 15)]
+	public int maximumPlanetOffsetFromPlayer = 5;
+
+	[Range (1, 10)]
+	public float sectorScale = 1;
+
+	public bool devMode, testNewGenerator;
 	public enum InputType { RotateLocal, PushHorizontal }
 	public InputType currentInputType = InputType.RotateLocal;
-
 	public Sprite mulletSpriteAstronaut, mulletSpriteCosmonaut;
 
 	void Start () {

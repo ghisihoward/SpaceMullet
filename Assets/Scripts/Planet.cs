@@ -30,7 +30,9 @@ public class Planet : MonoBehaviour {
 	}
 
 	void Update () {
-		if (this.transform.position.y < player.transform.position.y - 5f) {
+		if (this.transform.position.y <
+			player.transform.position.y - gameSettings.maximumPlanetOffsetFromPlayer
+		) {
 			foreach(Transform child in transform) {
 				GameObject.Destroy (child.gameObject);
 			}
