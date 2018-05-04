@@ -11,6 +11,9 @@ TagManager:
   - GameWorld
   - LevelManager
   - AudioManager
+  - Canvas
+  - Sector
+  - SectorCollider
   layers:
   - Default
   - TransparentFX
