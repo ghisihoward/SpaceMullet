@@ -4,11 +4,24 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 
+
 public class SceneSwapper : MonoBehaviour {
 
+	private string sceneName;
+	private Animator anim;
 	private AudioManager audioManager;
 
-	public void changeScene (string scene) {
+	void Start () {
+		anim = this.gameObject.GetComponent <Animator> ();
+	}
+
+	public void animateExit (string name) {
+		sceneName = name;
+		anim.Play ("FadeOut");
+	}
+
+	// This is an Event called by the Animation FadeOut.
+	private void changeScene () {
 		//why it calls the scene when it should set the music hmmmm
 		//ok it calls ChangeMusic when the scene is called buuut
 		//it won't set the right music right????? because the other
@@ -25,12 +38,12 @@ public class SceneSwapper : MonoBehaviour {
 		// which delivers us ONLY the ugly component we need. ¯\_(ツ)_/¯
 
 		// ∠('-' 」∠)＿
-		audioManager.ChangeMusic (scene); 
+		audioManager.ChangeMusic (sceneName); 
 		// Now the *mood* is set, we have have the audioManager and the script
 		// so we ask the *cool* dude to start playing music.
 
 
-		SceneManager.LoadScene (scene);
+		SceneManager.LoadScene (sceneName);
 		// \(ツ)_ *FINALLY* we change scene.
 		// The cool dude is already playing the right music.
 		// He won't stop.
@@ -40,4 +53,6 @@ public class SceneSwapper : MonoBehaviour {
 		// ヽ(^‿^)ノ
 
 	}
+
+
 }
