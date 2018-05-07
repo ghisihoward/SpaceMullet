@@ -51,5 +51,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7775789e1c20d004ba2eeaf49a8232fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timerText: {fileID: 0}
-  metersText: {fileID: 0}

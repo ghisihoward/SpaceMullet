@@ -111,11 +111,11 @@ public class GameManager : MonoBehaviour {
 	public void PlayButton () {
 		if (currentState == GameState.Menu) {
 			currentState = GameState.Ready;
-			levelManager.GenerateLevel (gameSettings.testNewGenerator);
+			levelManager.GenerateLevel ();
 		} else if (currentState == GameState.Paused) {
 			currentState = GameState.Playing;
 		} else if (currentState == GameState.GameOver) {
-			levelManager.GenerateLevel (gameSettings.testNewGenerator);
+			levelManager.GenerateLevel ();
 			this.resetPlayer ();
 			this.resetCamera ();
 		}

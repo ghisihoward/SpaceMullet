@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 114043419776278486}
   m_Layer: 0
   m_Name: LevelManager
-  m_TagString: Untagged
+  m_TagString: LevelManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -51,5 +51,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55fbd49dd0b1b494d85ffbdf8a4afa0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  planet: {fileID: 1786915708382128, guid: 6cc378f78a8838845a1aec711218e0da, type: 2}
-  quantidadeDePlanetas: 50
+  planetPrefab: {fileID: 1786915708382128, guid: 6cc378f78a8838845a1aec711218e0da,
+    type: 2}
+  sectorPrefab: {fileID: 1878724706649996, guid: e7de755c64784fc449b6e565e217e6aa,
+    type: 2}

@@ -11,6 +11,7 @@ TagManager:
   - GameWorld
   - LevelManager
   - Water
+  - AudioManager
   - Canvas
   - Sector
   - SectorCollider
