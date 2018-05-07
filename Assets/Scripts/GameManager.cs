@@ -38,7 +38,6 @@ public class GameManager : MonoBehaviour {
 
 	void Update () {
 		if (
-			currentState == GameState.Menu ||
 			currentState == GameState.Paused ||
 			currentState == GameState.GameOver
 		) {
@@ -46,16 +45,19 @@ public class GameManager : MonoBehaviour {
 		} else {
 			Time.timeScale = 1f;
 		}
-
-		UpdateUI ();
-
+		//CORRIGINDO BUGS: tempo não resetar e 
+		//tempo começa a contar antes das hora
+		if (currentState == GameState.Playing) {
+			UpdateStats ();
+			UpdateUI ();
+		}
+			
 		if (Blitzkrieg.GetGameObjectPosition(player).y < -0.009) {
-			currentState = GameState.GameOver;
-			pauseMenu.SetActive (true);
+			this.PlayerDeath ();
 		}
 	} 
 
-	public void UpdateUI () {
+	public void UpdateStats () {
 		distance = player.transform.position.y - playerInitialPos.y;
 		secondsCount += Time.deltaTime;
 
@@ -65,7 +67,9 @@ public class GameManager : MonoBehaviour {
 		} else if (minuteCount >= 60) {
 			minuteCount = 00;
 		}
+	}
 
+	public void UpdateUI () {
 		metersText.text = "Distance: " + distance.ToString ("0.00") + "m";
 		timerText.text = string.Format (
 			"Time: {0:0}:{1:00}", 
@@ -75,8 +79,7 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public void PlayerCollision () { 
-		currentState = GameState.GameOver;
-		pauseMenu.SetActive (true);
+		this.PlayerDeath ();
 	}
 
 	public void VerticalSwipe (float swipeMagnitude) {
@@ -128,6 +131,17 @@ public class GameManager : MonoBehaviour {
 			currentState = GameState.Paused;
 			pauseMenu.SetActive (true);
 		}
+	}
+
+	public void PlayerDeath () {
+		currentState = GameState.GameOver;
+		// TODO: Game Over stats + screen
+		// Reset Stuff
+		secondsCount = 0f;
+		minuteCount = 0;
+		distance = 0f;
+		UpdateUI ();
+		pauseMenu.SetActive (true);
 	}
 
 	public void resetPlayer () {
