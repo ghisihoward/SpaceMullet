@@ -6,25 +6,10 @@ public class ScoreManager : MonoBehaviour {
 	public int HighScoreSize = 6;
 	public List<Score> HighScores = new List<Score>();
 	public List<string> HighScoresList = new List<string>();
-	string[] names = {"Jorge", "Gejudio", "Marcondes", "Jureg", "Jiujing"};
 	string json;
 
 	void Start () {
 		GetHighScore ();
-	}
-
-	void Update(){
-		if (Input.GetMouseButtonDown (0)) {
-			AddScore ( names[Random.Range(0, 5)], Random.Range (0, 16));
-		}
-
-		if (Input.GetMouseButtonDown (2)) {
-			PlayerPrefs.DeleteAll ();
-		}
-
-		if (Input.GetMouseButtonDown (1)) {
-			GetHighScore ();
-		}
 	}
 
 	void sortScore(string type){
@@ -82,7 +67,7 @@ public class ScoreManager : MonoBehaviour {
 	}
 
 	public void AddScore(string newName, float newPoint){
-		if ((HighScores.Count > HighScoreSize) ? (newPoint > HighScores [HighScores.Count - 1].points): (true)) {
+		if ((HighScores.Count > HighScoreSize) ? (newPoint > HighScores [HighScores.Count - 1].points) : true) {
 			Score newScoreObject = new Score ();
 			newScoreObject.name = newName;
 			newScoreObject.points = newPoint;
