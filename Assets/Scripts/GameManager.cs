@@ -38,7 +38,6 @@ public class GameManager : MonoBehaviour {
 
 	void Update () {
 		if (
-			currentState == GameState.Menu ||
 			currentState == GameState.Paused ||
 			currentState == GameState.GameOver
 		) {
