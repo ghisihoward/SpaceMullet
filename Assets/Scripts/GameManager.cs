@@ -60,7 +60,10 @@ public class GameManager : MonoBehaviour {
 	public void UpdateStats () {
 		distance = player.transform.position.y - playerInitialPos.y;
 		secondsCount += Time.deltaTime;
-
+		//CORRIGINDO BUGS: distancia negativa
+		if (distance < 0) {
+			distance = 0;
+		}
 		if (secondsCount >= 60) {
 			minuteCount++;
 			secondsCount = 00f;
