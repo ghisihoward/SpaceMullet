@@ -10,6 +10,7 @@ TagManager:
   - GameSettings
   - GameWorld
   - LevelManager
+  - Water
   - AudioManager
   - Canvas
   - Sector
