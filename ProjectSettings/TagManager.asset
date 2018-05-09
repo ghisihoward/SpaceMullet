@@ -15,6 +15,10 @@ TagManager:
   - Canvas
   - Sector
   - SectorCollider
+  - GameOverMenu
+  - ScoreManager
+  - InputField
+  - ScoreField
   layers:
   - Default
   - TransparentFX

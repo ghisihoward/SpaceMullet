@@ -14,11 +14,16 @@ public class GameManager : MonoBehaviour {
 	private int minuteCount = 0;
 
 	// GAME OBJECTS
-	private GameObject player, pauseMenu;
+	private GameObject player, pauseMenu, gameOverMenu, inputObject;
+	private ScoreManager scoreManager;
 	private LevelManager levelManager;
 	private GameSettings gameSettings;
 	private Vector3 playerInitialPos, cameraInitialPos;
 
+	private UnityEngine.UI.Text scoreText;
+	private UnityEngine.UI.InputField scoreName;
+
+	float score = -1f;
 	// EASTER EGGS
 	private bool motherland = false;
 
@@ -29,8 +34,16 @@ public class GameManager : MonoBehaviour {
 
 		player = GameObject.FindGameObjectWithTag ("Player");
 		pauseMenu = GameObject.FindGameObjectWithTag ("PauseMenu");
+		gameOverMenu = GameObject.FindGameObjectWithTag ("GameOverMenu");
+		scoreText = GameObject.FindGameObjectWithTag ("ScoreField").GetComponent <Text> ();
+		inputObject = GameObject.FindGameObjectWithTag ("InputField");
+		scoreManager = GameObject.FindGameObjectWithTag ("ScoreManager").GetComponent<ScoreManager> ();
 		gameSettings = GameObject.FindGameObjectWithTag ("GameSettings").GetComponent<GameSettings> ();
 		levelManager = GameObject.FindGameObjectWithTag ("LevelManager").GetComponent<LevelManager> ();
+
+		scoreName = inputObject.GetComponent <InputField> ();
+		gameOverMenu.SetActive (false);
+	
 
 		playerInitialPos = player.transform.position;
 		cameraInitialPos = Camera.main.transform.position;
@@ -55,7 +68,25 @@ public class GameManager : MonoBehaviour {
 		if (Blitzkrieg.GetGameObjectPosition(player).y < -0.009) {
 			this.PlayerDeath ();
 		}
+			
+		if (currentState == GameState.GameOver && score != -1) {
+			if (scoreManager.isScore (score)) {
+				if (scoreName.isFocused && scoreName.text != "" && Input.GetKey (KeyCode.Return)) {					
+					scoreManager.AddScore (scoreName.text, score);
+					scoreName.text = "";
+					CleanUp ();
+				}
+			} else if (inputObject.activeSelf) {
+				inputObject.SetActive (false);
+			}
+		}
 	} 
+
+	public void GameOvertoPause(){
+		if (!inputObject.activeSelf) {
+			CleanUp ();
+		}
+	}
 
 	public void UpdateStats () {
 		distance = player.transform.position.y - playerInitialPos.y;
@@ -125,7 +156,7 @@ public class GameManager : MonoBehaviour {
 			this.resetPlayer ();
 			this.resetCamera ();
 		}
-
+		gameOverMenu.SetActive (false);
 		pauseMenu.SetActive (false);
 	}
 
@@ -137,14 +168,23 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public void PlayerDeath () {
-		currentState = GameState.GameOver;
-		// TODO: Game Over stats + screen
-		// Reset Stuff
+		if (currentState != GameState.GameOver) {
+			currentState = GameState.GameOver;
+			gameOverMenu.SetActive (true);
+			score = ((secondsCount + minuteCount * 60) * distance);
+			scoreText.text = "Score: " + score;
+		} 
+	}
+
+	public void CleanUp(){
+		inputObject.SetActive (true);
+		gameOverMenu.SetActive (false);
+		pauseMenu.SetActive (true);
 		secondsCount = 0f;
 		minuteCount = 0;
 		distance = 0f;
+		score = -1f;
 		UpdateUI ();
-		pauseMenu.SetActive (true);
 	}
 
 	public void resetPlayer () {
