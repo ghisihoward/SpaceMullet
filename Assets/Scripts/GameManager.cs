@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour {
 	private int minuteCount = 0;
 
 	// GAME OBJECTS
-	private GameObject player, pauseMenu, gameOverMenu, inputObject;
+	private GameObject player, pauseMenu, gameOverMenu, inputObject, inputManager;
 	private ScoreManager scoreManager;
 	private LevelManager levelManager;
 	private GameSettings gameSettings;
@@ -32,6 +32,7 @@ public class GameManager : MonoBehaviour {
 		timerText = GameObject.Find ("TextBox_Time").GetComponent<Text> ();
 		metersText = GameObject.Find ("TextBox_Distance").GetComponent<Text> ();
 
+		inputManager = GameObject.Find ("InputManager");
 		player = GameObject.FindGameObjectWithTag ("Player");
 		pauseMenu = GameObject.FindGameObjectWithTag ("PauseMenu");
 		gameOverMenu = GameObject.FindGameObjectWithTag ("GameOverMenu");
@@ -47,6 +48,8 @@ public class GameManager : MonoBehaviour {
 
 		playerInitialPos = player.transform.position;
 		cameraInitialPos = Camera.main.transform.position;
+
+		inputManager.SetActive (false);
 	}
 
 	void Update () {
@@ -149,6 +152,7 @@ public class GameManager : MonoBehaviour {
 		if (currentState == GameState.Menu) {
 			currentState = GameState.Ready;
 			levelManager.GenerateLevel ();
+			inputManager.SetActive (true);
 		} else if (currentState == GameState.Paused) {
 			currentState = GameState.Playing;
 		} else if (currentState == GameState.GameOver) {
