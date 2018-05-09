@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour {
 
 	// GAME OBJECTS
 	private GameObject player, pauseMenu;
+	private GameObject inputManager;
 	private LevelManager levelManager;
 	private GameSettings gameSettings;
 	private Vector3 playerInitialPos, cameraInitialPos;
@@ -27,6 +28,7 @@ public class GameManager : MonoBehaviour {
 		timerText = GameObject.Find ("TextBox_Time").GetComponent<Text> ();
 		metersText = GameObject.Find ("TextBox_Distance").GetComponent<Text> ();
 
+		inputManager = GameObject.Find ("InputManager");
 		player = GameObject.FindGameObjectWithTag ("Player");
 		pauseMenu = GameObject.FindGameObjectWithTag ("PauseMenu");
 		gameSettings = GameObject.FindGameObjectWithTag ("GameSettings").GetComponent<GameSettings> ();
@@ -34,6 +36,8 @@ public class GameManager : MonoBehaviour {
 
 		playerInitialPos = player.transform.position;
 		cameraInitialPos = Camera.main.transform.position;
+
+		inputManager.SetActive (false);
 	}
 
 	void Update () {
@@ -118,6 +122,7 @@ public class GameManager : MonoBehaviour {
 		if (currentState == GameState.Menu) {
 			currentState = GameState.Ready;
 			levelManager.GenerateLevel ();
+			inputManager.SetActive (true);
 		} else if (currentState == GameState.Paused) {
 			currentState = GameState.Playing;
 		} else if (currentState == GameState.GameOver) {
