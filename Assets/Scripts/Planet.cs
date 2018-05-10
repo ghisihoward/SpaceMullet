@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Planet : MonoBehaviour {
 
-	public float gravForce  = 0;
+	private float gravForce  = 0;
 	private float magnitude, mulletMass;
-	public GameObject planetCore;
+	private GameObject planetCore;
 	private GameSettings gameSettings;
 	private GameObject player;
 	private PlanetOrbit orbit;
@@ -33,7 +33,7 @@ public class Planet : MonoBehaviour {
 
 	void Update () {
 		if (this.transform.position.y <
-			player.transform.position.y - gameSettings.maximumPlanetYOffsetFromPlayer
+			player.transform.position.y - gameSettings.maxPlanetPlayerOffset
 		) {
 			foreach(Transform child in transform) {
 				GameObject.Destroy (child.gameObject);

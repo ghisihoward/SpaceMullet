@@ -5,6 +5,9 @@ using UnityEngine;
 public class GameSettings : MonoBehaviour {
 
 	[Range (1, 10)]
+	public int transitionSpeed = 1;
+
+	[Range (1, 10)]
 	public float mulletMass = 1;
 
 	[Range (0, 1)]
@@ -35,7 +38,7 @@ public class GameSettings : MonoBehaviour {
 	public float spawnDistance = 3;
 
 	[Range (5, 15)]
-	public int maximumPlanetYOffsetFromPlayer = 5;
+	public int maxPlanetPlayerOffset = 5;
 
 	[Range (1, 15)]
 	public float sectorScale = 1;
@@ -45,6 +48,8 @@ public class GameSettings : MonoBehaviour {
 	public InputType currentInputType = InputType.RotateLocal;
 	public Sprite mulletSpriteAstronaut, mulletSpriteCosmonaut;
 	public GameObject planetPrefab;
+
+	private static GameSettings instance;
 
 	void Start () {
 		if (minGrav > maxGrav ) {
@@ -60,6 +65,15 @@ public class GameSettings : MonoBehaviour {
 		if (minScale > maxScale) {
 			Debug.Log ("minScale > maxScale");
 			Application.Quit ();
+		}
+	}
+
+	void Awake () {
+		if (instance != null) {
+			Destroy (gameObject);
+		} else {
+			instance = this;
+			GameObject.DontDestroyOnLoad (gameObject);
 		}
 	}
 }
