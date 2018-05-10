@@ -74,7 +74,7 @@ public class GameManager : MonoBehaviour {
 			
 		if (currentState == GameState.GameOver && score != -1) {
 			if (scoreManager.isScore (score)) {
-				if (scoreName.isFocused && scoreName.text != "" && Input.GetKey (KeyCode.Return)) {					
+				if (scoreName.text != "" && Input.GetKey (KeyCode.Return)) {					
 					scoreManager.AddScore (scoreName.text, score);
 					scoreName.text = "";
 					CleanUp ();
@@ -100,7 +100,7 @@ public class GameManager : MonoBehaviour {
 		}
 		if (secondsCount >= 60) {
 			minuteCount++;
-			secondsCount = 00f;
+			secondsCount -= 60;
 		} else if (minuteCount >= 60) {
 			minuteCount = 00;
 		}
@@ -110,8 +110,8 @@ public class GameManager : MonoBehaviour {
 		metersText.text = "Distance: " + distance.ToString ("0.00") + "m";
 		timerText.text = string.Format (
 			"Time: {0:0}:{1:00}", 
-			Mathf.Floor (secondsCount / 60), 
-			secondsCount % 60
+			Mathf.Floor (minuteCount), 
+			Mathf.Floor (secondsCount)
 		);
 	}
 
@@ -175,7 +175,7 @@ public class GameManager : MonoBehaviour {
 		if (currentState != GameState.GameOver) {
 			currentState = GameState.GameOver;
 			gameOverMenu.SetActive (true);
-			score = ((secondsCount + minuteCount * 60) * distance);
+			score = Mathf.Floor ((secondsCount + minuteCount * 60) * distance);
 			scoreText.text = "Score: " + score;
 		} 
 	}
