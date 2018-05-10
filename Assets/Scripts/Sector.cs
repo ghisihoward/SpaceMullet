@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Sector : MonoBehaviour {
 
-	public GameObject planetPrefab;
+	private GameObject planetPrefab;
 	private GameSettings gameSettings;
 	private enum LifeState { Birth, Spread }
 	private LifeState currentState = LifeState.Birth;

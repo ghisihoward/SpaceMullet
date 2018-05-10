@@ -5,7 +5,7 @@ using UnityEngine;
 public class LevelManager : MonoBehaviour {
 
 
-	public GameObject planetPrefab, sectorPrefab;
+	public GameObject sectorPrefab;
 	private GameObject sectors, gameWorld;
 
 	public void Start () {
@@ -15,6 +15,14 @@ public class LevelManager : MonoBehaviour {
 
 	public void GenerateLevel () {
 		Instantiate (sectorPrefab, gameWorld.transform.position, Quaternion.identity, sectors.transform);
+	}
+
+	public void CleanGameWorld () {
+		foreach (GameObject planet in GameObject.FindGameObjectsWithTag("Planet"))
+			GameObject.Destroy (planet);
+
+		foreach (GameObject sector in GameObject.FindGameObjectsWithTag("Sector"))
+			GameObject.Destroy (sector);
 	}
 
 }

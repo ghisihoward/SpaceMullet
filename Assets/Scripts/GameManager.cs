@@ -45,7 +45,6 @@ public class GameManager : MonoBehaviour {
 		scoreName = inputObject.GetComponent <InputField> ();
 		gameOverMenu.SetActive (false);
 	
-
 		playerInitialPos = player.transform.position;
 		cameraInitialPos = Camera.main.transform.position;
 
@@ -156,6 +155,7 @@ public class GameManager : MonoBehaviour {
 		} else if (currentState == GameState.Paused) {
 			currentState = GameState.Playing;
 		} else if (currentState == GameState.GameOver) {
+			levelManager.CleanGameWorld ();
 			levelManager.GenerateLevel ();
 			this.resetPlayer ();
 			this.resetCamera ();
@@ -198,6 +198,8 @@ public class GameManager : MonoBehaviour {
 		player.GetComponent<Rigidbody2D> ().velocity = new Vector2 (0f, 0f);
 		player.GetComponent<Rigidbody2D> ().angularVelocity = 0f;
 		player.SetActive (true);
+
+
 		currentState = GameState.Ready;
 	}
 

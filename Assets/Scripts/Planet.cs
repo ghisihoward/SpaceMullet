@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Planet : MonoBehaviour {
 
-	public float gravForce  = 0;
+	private float gravForce  = 0;
 	private float magnitude, mulletMass;
-	public GameObject planetCore;
+	private GameObject planetCore;
 	private GameSettings gameSettings;
 	private GameObject player;
 	private PlanetOrbit orbit;
