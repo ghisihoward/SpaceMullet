@@ -20,6 +20,7 @@ TagManager:
   - InputField
   - ScoreField
   - Planet
+  - InputManager
   layers:
   - Default
   - TransparentFX

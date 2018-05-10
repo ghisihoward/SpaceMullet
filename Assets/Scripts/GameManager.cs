@@ -32,12 +32,12 @@ public class GameManager : MonoBehaviour {
 		timerText = GameObject.Find ("TextBox_Time").GetComponent<Text> ();
 		metersText = GameObject.Find ("TextBox_Distance").GetComponent<Text> ();
 
-		inputManager = GameObject.Find ("InputManager");
 		player = GameObject.FindGameObjectWithTag ("Player");
 		pauseMenu = GameObject.FindGameObjectWithTag ("PauseMenu");
-		gameOverMenu = GameObject.FindGameObjectWithTag ("GameOverMenu");
 		scoreText = GameObject.FindGameObjectWithTag ("ScoreField").GetComponent <Text> ();
 		inputObject = GameObject.FindGameObjectWithTag ("InputField");
+		inputManager = GameObject.FindGameObjectWithTag ("InputManager");
+		gameOverMenu = GameObject.FindGameObjectWithTag ("GameOverMenu");
 		scoreManager = GameObject.FindGameObjectWithTag ("ScoreManager").GetComponent<ScoreManager> ();
 		gameSettings = GameObject.FindGameObjectWithTag ("GameSettings").GetComponent<GameSettings> ();
 		levelManager = GameObject.FindGameObjectWithTag ("LevelManager").GetComponent<LevelManager> ();
@@ -60,8 +60,7 @@ public class GameManager : MonoBehaviour {
 		} else {
 			Time.timeScale = 1f;
 		}
-		//CORRIGINDO BUGS: tempo não resetar e 
-		//tempo começa a contar antes das hora
+
 		if (currentState == GameState.Playing) {
 			UpdateStats ();
 			UpdateUI ();
@@ -93,10 +92,11 @@ public class GameManager : MonoBehaviour {
 	public void UpdateStats () {
 		distance = player.transform.position.y - playerInitialPos.y;
 		secondsCount += Time.deltaTime;
-		//CORRIGINDO BUGS: distancia negativa
+
 		if (distance < 0) {
 			distance = 0;
 		}
+
 		if (secondsCount >= 60) {
 			minuteCount++;
 			secondsCount = 00f;
