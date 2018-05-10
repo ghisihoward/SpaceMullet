@@ -14,12 +14,16 @@ public class GameManager : MonoBehaviour {
 	private int minuteCount = 0;
 
 	// GAME OBJECTS
-	private GameObject player, pauseMenu;
-	private GameObject inputManager;
+	private GameObject player, pauseMenu, gameOverMenu, inputObject, inputManager;
+	private ScoreManager scoreManager;
 	private LevelManager levelManager;
 	private GameSettings gameSettings;
 	private Vector3 playerInitialPos, cameraInitialPos;
 
+	private UnityEngine.UI.Text scoreText;
+	private UnityEngine.UI.InputField scoreName;
+
+	float score = -1f;
 	// EASTER EGGS
 	private bool motherland = false;
 
@@ -28,12 +32,19 @@ public class GameManager : MonoBehaviour {
 		timerText = GameObject.Find ("TextBox_Time").GetComponent<Text> ();
 		metersText = GameObject.Find ("TextBox_Distance").GetComponent<Text> ();
 
-		inputManager = GameObject.Find ("InputManager");
 		player = GameObject.FindGameObjectWithTag ("Player");
 		pauseMenu = GameObject.FindGameObjectWithTag ("PauseMenu");
+		scoreText = GameObject.FindGameObjectWithTag ("ScoreField").GetComponent <Text> ();
+		inputObject = GameObject.FindGameObjectWithTag ("InputField");
+		inputManager = GameObject.FindGameObjectWithTag ("InputManager");
+		gameOverMenu = GameObject.FindGameObjectWithTag ("GameOverMenu");
+		scoreManager = GameObject.FindGameObjectWithTag ("ScoreManager").GetComponent<ScoreManager> ();
 		gameSettings = GameObject.FindGameObjectWithTag ("GameSettings").GetComponent<GameSettings> ();
 		levelManager = GameObject.FindGameObjectWithTag ("LevelManager").GetComponent<LevelManager> ();
 
+		scoreName = inputObject.GetComponent <InputField> ();
+		gameOverMenu.SetActive (false);
+	
 		playerInitialPos = player.transform.position;
 		cameraInitialPos = Camera.main.transform.position;
 
@@ -49,8 +60,7 @@ public class GameManager : MonoBehaviour {
 		} else {
 			Time.timeScale = 1f;
 		}
-		//CORRIGINDO BUGS: tempo não resetar e 
-		//tempo começa a contar antes das hora
+
 		if (currentState == GameState.Playing) {
 			UpdateStats ();
 			UpdateUI ();
@@ -59,15 +69,34 @@ public class GameManager : MonoBehaviour {
 		if (Blitzkrieg.GetGameObjectPosition(player).y < -0.009) {
 			this.PlayerDeath ();
 		}
+			
+		if (currentState == GameState.GameOver && score != -1) {
+			if (scoreManager.isScore (score)) {
+				if (scoreName.isFocused && scoreName.text != "" && Input.GetKey (KeyCode.Return)) {					
+					scoreManager.AddScore (scoreName.text, score);
+					scoreName.text = "";
+					CleanUp ();
+				}
+			} else if (inputObject.activeSelf) {
+				inputObject.SetActive (false);
+			}
+		}
 	} 
+
+	public void GameOvertoPause(){
+		if (!inputObject.activeSelf) {
+			CleanUp ();
+		}
+	}
 
 	public void UpdateStats () {
 		distance = player.transform.position.y - playerInitialPos.y;
 		secondsCount += Time.deltaTime;
-		//CORRIGINDO BUGS: distancia negativa
+
 		if (distance < 0) {
 			distance = 0;
 		}
+
 		if (secondsCount >= 60) {
 			minuteCount++;
 			secondsCount = 00f;
@@ -126,11 +155,12 @@ public class GameManager : MonoBehaviour {
 		} else if (currentState == GameState.Paused) {
 			currentState = GameState.Playing;
 		} else if (currentState == GameState.GameOver) {
+			levelManager.CleanGameWorld ();
 			levelManager.GenerateLevel ();
 			this.resetPlayer ();
 			this.resetCamera ();
 		}
-
+		gameOverMenu.SetActive (false);
 		pauseMenu.SetActive (false);
 	}
 
@@ -142,14 +172,23 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public void PlayerDeath () {
-		currentState = GameState.GameOver;
-		// TODO: Game Over stats + screen
-		// Reset Stuff
+		if (currentState != GameState.GameOver) {
+			currentState = GameState.GameOver;
+			gameOverMenu.SetActive (true);
+			score = ((secondsCount + minuteCount * 60) * distance);
+			scoreText.text = "Score: " + score;
+		} 
+	}
+
+	public void CleanUp(){
+		inputObject.SetActive (true);
+		gameOverMenu.SetActive (false);
+		pauseMenu.SetActive (true);
 		secondsCount = 0f;
 		minuteCount = 0;
 		distance = 0f;
+		score = -1f;
 		UpdateUI ();
-		pauseMenu.SetActive (true);
 	}
 
 	public void resetPlayer () {
@@ -159,6 +198,8 @@ public class GameManager : MonoBehaviour {
 		player.GetComponent<Rigidbody2D> ().velocity = new Vector2 (0f, 0f);
 		player.GetComponent<Rigidbody2D> ().angularVelocity = 0f;
 		player.SetActive (true);
+
+
 		currentState = GameState.Ready;
 	}
 

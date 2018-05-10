@@ -51,6 +51,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 558c8b25bcc609442b5afa0e07a04937, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  transitionSpeed: 4
   mulletMass: 1
   mulletPositionTreshold: 0.3
   accelerationForce: 1
@@ -61,13 +62,13 @@ MonoBehaviour:
   minScale: 2
   maxScale: 9
   spawnDistance: 8
-  maximumPlanetYOffsetFromPlayer: 5
-  sectorScale: 8
+  maxPlanetPlayerOffset: 5
+  sectorScale: 6
   devMode: 1
   currentInputType: 0
   mulletSpriteAstronaut: {fileID: 21300000, guid: a52519d2a08d6cd469d3266e0353505b,
     type: 3}
   mulletSpriteCosmonaut: {fileID: 21300000, guid: 84bf9f94b9ab2d441acf775b0d458a3a,
     type: 3}
-  planetPrefab: {fileID: 1786915708382128, guid: 6cc378f78a8838845a1aec711218e0da,
+  planetPrefab: {fileID: 1399843033963338, guid: 92b5874a6b62d96448c2a8029f6c92c8,
     type: 2}

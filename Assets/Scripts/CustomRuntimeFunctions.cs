@@ -14,6 +14,9 @@ public class CustomRuntimeFunctions : EditorWindow{
 		if (GUILayout.Button ("Spread Sectors Once")) {
 			this.SpreadSectors ();
 		}
+		if (GUILayout.Button ("Reset Score")) {
+			PlayerPrefs.DeleteAll ();
+		}
 	}
 
 

@@ -84,6 +84,11 @@ public class ScoreManager : MonoBehaviour {
 	public float GetPointAt(int pos){
 		return HighScores [pos - 1].points;
 	}
+
+	public bool isScore (float newScore){
+		float scoreMin = ((HighScores.Count < HighScoreSize) ? 0 : HighScores [HighScores.Count - 1].points);
+		return (newScore > scoreMin);
+	}
 }
 
 public class Score {

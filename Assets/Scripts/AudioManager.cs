@@ -13,6 +13,7 @@ public class AudioManager : MonoBehaviour {
 	private string musicToPlay, musicPlaying;
 
 	static AudioManager instance = null;
+
 	void Awake () {
 		if (instance != null) {
 			Destroy (gameObject);
