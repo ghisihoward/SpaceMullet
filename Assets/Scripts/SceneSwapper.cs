@@ -3,16 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-
-
 public class SceneSwapper : MonoBehaviour {
 
 	private string sceneName;
 	private Animator anim;
 	private AudioManager audioManager;
+	private GameSettings gameSettings;
 
 	void Start () {
 		anim = this.gameObject.GetComponent <Animator> ();
+		gameSettings = GameObject.FindWithTag ("GameSettings").GetComponent <GameSettings> ();
+		anim.speed = gameSettings.transitionSpeed;
 	}
 
 	public void animateExit (string name) {
