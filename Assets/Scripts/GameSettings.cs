@@ -48,7 +48,8 @@ public class GameSettings : MonoBehaviour {
 	public InputType currentInputType = InputType.RotateLocal;
 	public Sprite mulletSpriteAstronaut, mulletSpriteCosmonaut;
 	public GameObject planetPrefab;
-	private GameSettings instance;
+
+	private static GameSettings instance;
 
 	void Start () {
 		if (minGrav > maxGrav ) {
