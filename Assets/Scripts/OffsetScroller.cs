@@ -3,24 +3,37 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class OffsetScroller : MonoBehaviour {
-
-	public float speedModifier;
+	
+	private GameObject camera;
+	public float speedModifier = 0.0002f;
 	public Vector2 inputVector;
 	public Material newMaterial;
-	private Rigidbody2D mulletBody;
+	public Vector2 outputVector = Vector2.zero;
+	Vector2 lastPos;
+	Vector2 velocityDiff;
 
 	void Start () {
-		mulletBody = GameObject.FindGameObjectWithTag ("Player").GetComponent<Rigidbody2D> ();
+		camera = GameObject.FindGameObjectWithTag ("MainCamera");
+		lastPos = (camera.transform.position);
 		newMaterial = new Material (GetComponent<MeshRenderer> ().material);
 		GetComponent<MeshRenderer> ().material = newMaterial;
 	}
 
 	void Update () {
-		inputVector = mulletBody.velocity;
+		if (float.IsNaN(outputVector.x))
+			outputVector = Vector2.zero;
+	}
 
-		Vector2 outputVector = new Vector2(0, 0);
-		outputVector.x = Mathf.Repeat (inputVector.x * speedModifier * Time.time, 1);
-		outputVector.y = Mathf.Repeat (inputVector.y * speedModifier * Time.time, 1);
+	void LateUpdate(){
+		velocityDiff = ((new Vector2 (camera.transform.position.x, camera.transform.position.y) - lastPos) / Time.deltaTime);
+
+		lastPos = camera.transform.position;
+		inputVector = velocityDiff;
+
+		outputVector.x += inputVector.x * speedModifier;
+		outputVector.y += inputVector.y * speedModifier;
+		outputVector.x = Mathf.Repeat (outputVector.x, 1);
+		outputVector.y = Mathf.Repeat (outputVector.y, 1);
 
 		GetComponent<MeshRenderer> ().sharedMaterial.SetTextureOffset ("_MainTex", outputVector);
 	}

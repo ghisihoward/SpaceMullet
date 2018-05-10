@@ -117,9 +117,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4614302669435278}
   - component: {fileID: 212488302809605860}
+  - component: {fileID: 95319919345997596}
   m_Layer: 0
   m_Name: PlayerSprite
-  m_TagString: Untagged
+  m_TagString: PlayerSprite
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -256,6 +257,23 @@ CapsuleCollider2D:
   m_Offset: {x: -0.025541395, y: 0.033053637}
   m_Size: {x: 0.2, y: 0.2}
   m_Direction: 0
+--- !u!95 &95319919345997596
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1333604600624818}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c02575d5a53850d4f86fcefdf7e5deb6, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!95 &95674248268189046
 Animator:
   serializedVersion: 3
