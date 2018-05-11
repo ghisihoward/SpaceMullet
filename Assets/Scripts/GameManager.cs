@@ -84,17 +84,22 @@ public class GameManager : MonoBehaviour {
 		}
 			
 		if (currentState == GameState.GameOver && score != -1) {
-			if (scoreManager.isScore (score)) {
-				if (scoreName.text != "" && (Input.GetKey (KeyCode.Return) || scoreName.wasCanceled)) {				
-					scoreManager.AddScore (scoreName.text, score);
-					scoreName.text = "";
-					CleanUp ();
-				}
-			} else if (inputObject.activeSelf) {
+			if (scoreManager.isScore (score)){
+				if (Input.GetKey(KeyCode.Return)) InputNameSend ();
+			}
+			else if (inputObject.activeSelf) {
 				inputObject.SetActive (false);
 			}
 		}
 	} 
+
+	public void InputNameSend (){
+		if (scoreName.text != "") {				
+			scoreManager.AddScore (scoreName.text, score);
+			scoreName.text = "";
+			CleanUp ();
+		}
+	}
 
 	public void GameOvertoPause(){
 		if (!inputObject.activeSelf) {
