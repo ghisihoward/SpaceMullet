@@ -592,7 +592,7 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 114518953928186738, guid: 85d33d3a159aaa24eaafd7fa18b30023,
+    - target: {fileID: 114955893586037510, guid: 85d33d3a159aaa24eaafd7fa18b30023,
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
