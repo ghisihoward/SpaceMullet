@@ -72,7 +72,7 @@ public class GameManager : MonoBehaviour {
 			
 		if (currentState == GameState.GameOver && score != -1) {
 			if (scoreManager.isScore (score)) {
-				if (scoreName.text != "" && Input.GetKey (KeyCode.Return)) {					
+				if (scoreName.text != "" && (Input.GetKey (KeyCode.Return) || scoreName.wasCanceled)) {				
 					scoreManager.AddScore (scoreName.text, score);
 					scoreName.text = "";
 					CleanUp ();
