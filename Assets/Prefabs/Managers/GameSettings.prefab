@@ -58,12 +58,12 @@ MonoBehaviour:
   minGrav: 2
   maxGrav: 10
   minOrbit: 2
-  maxOrbit: 10
-  minScale: 2
+  maxOrbit: 8
+  minScale: 4
   maxScale: 9
   spawnDistance: 8
   maxPlanetPlayerOffset: 5
-  sectorScale: 6
+  sectorScale: 5
   devMode: 1
   currentInputType: 0
   mulletSpriteAstronaut: {fileID: 21300000, guid: a52519d2a08d6cd469d3266e0353505b,
@@ -71,4 +71,6 @@ MonoBehaviour:
   mulletSpriteCosmonaut: {fileID: 21300000, guid: 84bf9f94b9ab2d441acf775b0d458a3a,
     type: 3}
   planetPrefab: {fileID: 1399843033963338, guid: 92b5874a6b62d96448c2a8029f6c92c8,
+    type: 2}
+  sectorPrefab: {fileID: 1878724706649996, guid: e7de755c64784fc449b6e565e217e6aa,
     type: 2}

@@ -6,16 +6,14 @@ public class Planet : MonoBehaviour {
 
 	private float gravForce  = 0;
 	private float magnitude, mulletMass;
-	private GameObject planetCore;
+	private GameObject planetCore, player;
 	private GameSettings gameSettings;
-	private GameObject player;
+	private LevelManager levelManager;
 	private PlanetOrbit orbit;
 
 	void Start () {
-		planetCore = transform.Find ("Core").gameObject;
-		gameSettings = GameObject.Find ("GameSettings").GetComponent<GameSettings> ();
 		player = GameObject.FindGameObjectWithTag ("Player");
-		orbit = this.transform.Find ("Orbit").gameObject.GetComponent<PlanetOrbit> ();
+		gameSettings = GameObject.Find ("GameSettings").GetComponent<GameSettings> ();
 	}
 	
 	public void SomethingInOrbit (GameObject bodyInOrbit) {
@@ -48,12 +46,25 @@ public class Planet : MonoBehaviour {
 	}
 
 	public void SetRandomPlanet () {
+		// Gotta load this here, because Start doesn't run before this is called.
+		levelManager = GameObject.FindGameObjectWithTag ("LevelManager").GetComponent<LevelManager> ();
+		planetCore = transform.Find ("Core").gameObject;
 		gameSettings = GameObject.Find ("GameSettings").GetComponent<GameSettings> ();
 		orbit = this.transform.Find ("Orbit").gameObject.GetComponent<PlanetOrbit> ();
+
 		float newScale = Random.Range (gameSettings.minScale, gameSettings.maxScale);
 
 		this.transform.localScale = new Vector3 (newScale, newScale, 1);
 		this.SetGravitationForce (Random.Range (gameSettings.minGrav, gameSettings.maxGrav));
 		orbit.SetOrbit (Random.Range (gameSettings.minOrbit, gameSettings.maxOrbit));
+
+		GameObject planetSprites = planetCore.transform.Find ("Planet Sprites").gameObject;
+		planetSprites.GetComponent<SpriteRenderer> ().sprite = levelManager.GetRandomSurface ();
+
+		GameObject planetOverlayOne = planetSprites.transform.Find ("Overlay 1").gameObject;
+		planetOverlayOne.GetComponent<SpriteRenderer> ().sprite = levelManager.GetRandomOverlay ();
+
+		GameObject planetOverlayTwo = planetSprites.transform.Find ("Overlay 2").gameObject;
+		planetOverlayTwo.GetComponent<SpriteRenderer> ().sprite = levelManager.GetRandomOverlay ();
 	}
 }

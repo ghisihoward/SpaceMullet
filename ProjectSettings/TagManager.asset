@@ -21,6 +21,7 @@ TagManager:
   - ScoreField
   - Planet
   - InputManager
+  - PlayerSprite
   layers:
   - Default
   - TransparentFX
