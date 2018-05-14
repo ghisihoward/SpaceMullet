@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class OffsetScroller : MonoBehaviour {
 	
-	private GameObject camera;
 	public float speedModifier = 0.0002f;
 	public Vector2 inputVector;
 	public Material newMaterial;
@@ -13,8 +12,7 @@ public class OffsetScroller : MonoBehaviour {
 	Vector2 velocityDiff;
 
 	void Start () {
-		camera = GameObject.FindGameObjectWithTag ("MainCamera");
-		lastPos = (camera.transform.position);
+		lastPos = transform.position;
 		newMaterial = new Material (GetComponent<MeshRenderer> ().material);
 		GetComponent<MeshRenderer> ().material = newMaterial;
 	}
@@ -25,9 +23,9 @@ public class OffsetScroller : MonoBehaviour {
 	}
 
 	void LateUpdate(){
-		velocityDiff = ((new Vector2 (camera.transform.position.x, camera.transform.position.y) - lastPos) / Time.deltaTime);
+		velocityDiff = ((new Vector2 (transform.position.x, transform.position.y) - lastPos) / Time.deltaTime);
 
-		lastPos = camera.transform.position;
+		lastPos = transform.position;
 		inputVector = velocityDiff;
 
 		outputVector.x += inputVector.x * speedModifier;

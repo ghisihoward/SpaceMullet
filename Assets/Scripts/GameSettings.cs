@@ -43,6 +43,9 @@ public class GameSettings : MonoBehaviour {
 	[Range (1, 15)]
 	public float sectorScale = 1;
 
+	[Range (1, 10)]
+	public float controlForce = 5;
+
 	public bool devMode;
 	public enum InputType { RotateLocal, PushHorizontal }
 	public InputType currentInputType = InputType.RotateLocal;
