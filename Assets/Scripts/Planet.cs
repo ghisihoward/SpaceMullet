@@ -58,13 +58,17 @@ public class Planet : MonoBehaviour {
 		this.SetGravitationForce (Random.Range (gameSettings.minGrav, gameSettings.maxGrav));
 		orbit.SetOrbit (Random.Range (gameSettings.minOrbit, gameSettings.maxOrbit));
 
+		// Add one surface
 		GameObject planetSprites = planetCore.transform.Find ("Planet Sprites").gameObject;
 		planetSprites.GetComponent<SpriteRenderer> ().sprite = levelManager.GetRandomSurface ();
 
+		// Add n overlays
 		GameObject planetOverlayOne = planetSprites.transform.Find ("Overlay 1").gameObject;
 		planetOverlayOne.GetComponent<SpriteRenderer> ().sprite = levelManager.GetRandomOverlay ();
 
 		GameObject planetOverlayTwo = planetSprites.transform.Find ("Overlay 2").gameObject;
 		planetOverlayTwo.GetComponent<SpriteRenderer> ().sprite = levelManager.GetRandomOverlay ();
+
+		// Add n rings
 	}
 }

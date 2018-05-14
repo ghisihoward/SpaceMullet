@@ -46,6 +46,21 @@ public class GameSettings : MonoBehaviour {
 	[Range (1, 10)]
 	public float controlForce = 5;
 
+	[Range (1, 2)]
+	public int minNOverlays = 1;
+
+	[Range (2, 4)]
+	public int maxNOverlays = 2;
+
+	[Range (0, 4)]
+	public int maxNRings = 2;
+
+	[Range (0, 100)]
+	public int chanceForRing = 10;
+
+	[Range (0, 100)]
+	public int chanceForWeirdPlanet = 5;
+
 	public bool devMode;
 	public enum InputType { RotateLocal, PushHorizontal }
 	public InputType currentInputType = InputType.RotateLocal;
@@ -55,7 +70,7 @@ public class GameSettings : MonoBehaviour {
 	private static GameSettings instance;
 
 	void Start () {
-		if (minGrav > maxGrav ) {
+		if (minGrav > maxGrav) {
 			Debug.Log ("minGravitationForce > maxGravitationForce");
 			Application.Quit ();
 		}
