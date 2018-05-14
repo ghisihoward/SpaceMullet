@@ -7,7 +7,7 @@ public class LevelManager : MonoBehaviour {
 
 	private GameSettings gameSettings;
 	private GameObject sectors, gameWorld;
-	private List<Sprite> surfaces, overlays, rings;
+	private List<Sprite> overlays, overlaysRare, rings, surfaces, weirdPlanets;
 
 	public void Start () {
 		gameWorld = GameObject.FindGameObjectWithTag ("GameWorld");
@@ -29,9 +29,11 @@ public class LevelManager : MonoBehaviour {
 	}
 
 	private void setUpTexturesResources () {
-		surfaces = loadTextures("Planets/Surfaces/");
 		overlays = loadTextures("Planets/Overlays/");
+		overlaysRare = loadTextures("Planets/OverlaysRare/");
 		rings = loadTextures("Planets/Rings/");
+		surfaces = loadTextures("Planets/Surfaces/");
+		weirdPlanets = loadTextures("Planets/WeirdPlanets/");
 	}
 
 	private List<Sprite> loadTextures (string folder) {
@@ -44,15 +46,23 @@ public class LevelManager : MonoBehaviour {
 		}
 	}
 
-	public Sprite GetRandomSurface () {
-		return surfaces [Random.Range (0, surfaces.Count)];
-	}
-
 	public Sprite GetRandomOverlay () {
 		return overlays [Random.Range (0, overlays.Count)];
 	}
 
+	public Sprite GetRandomOverlayRare () {
+		return overlaysRare [Random.Range (0, overlaysRare.Count)];
+	}
+
 	public Sprite GetRandomRing () {
 		return rings [Random.Range (0, rings.Count)];
+	}
+
+	public Sprite GetRandomSurface () {
+		return surfaces [Random.Range (0, surfaces.Count)];
+	}
+
+	public Sprite GetRandomWeirdPlanet () {
+		return weirdPlanets [Random.Range (0, weirdPlanets.Count)];
 	}
 }

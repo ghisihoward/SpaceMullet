@@ -46,7 +46,7 @@ public class Planet : MonoBehaviour {
 	}
 
 	public void SetRandomPlanet () {
-		// Gotta load this here, because Start doesn't run before this is called.
+		// Gotta load this here, because this is called before Start () is called.
 		levelManager = GameObject.FindGameObjectWithTag ("LevelManager").GetComponent<LevelManager> ();
 		planetCore = transform.Find ("Core").gameObject;
 		gameSettings = GameObject.Find ("GameSettings").GetComponent<GameSettings> ();
@@ -58,11 +58,18 @@ public class Planet : MonoBehaviour {
 		this.SetGravitationForce (Random.Range (gameSettings.minGrav, gameSettings.maxGrav));
 		orbit.SetOrbit (Random.Range (gameSettings.minOrbit, gameSettings.maxOrbit));
 
+		// Check for Weird Planet Standalone
+
+
+		// Make a normal planet otherwise
+
 		// Add one surface
 		GameObject planetSprites = planetCore.transform.Find ("Planet Sprites").gameObject;
 		planetSprites.GetComponent<SpriteRenderer> ().sprite = levelManager.GetRandomSurface ();
 
-		// Add n overlays
+		// Check for rare overlays
+
+		// Add n overlays 
 		GameObject planetOverlayOne = planetSprites.transform.Find ("Overlay 1").gameObject;
 		planetOverlayOne.GetComponent<SpriteRenderer> ().sprite = levelManager.GetRandomOverlay ();
 

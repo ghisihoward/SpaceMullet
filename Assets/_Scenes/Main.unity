@@ -282,6 +282,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 114656459641283302, guid: 3b2cd0c92a610ee469d30375ac553232,
+        type: 2}
+      propertyPath: maxPlanetPlayerOffset
+      value: 15
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3b2cd0c92a610ee469d30375ac553232, type: 2}
   m_IsPrefabParent: 0
