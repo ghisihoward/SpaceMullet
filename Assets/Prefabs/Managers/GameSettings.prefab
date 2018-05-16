@@ -62,8 +62,15 @@ MonoBehaviour:
   minScale: 4
   maxScale: 9
   spawnDistance: 8
-  maxPlanetPlayerOffset: 5
+  maxPlanetPlayerOffset: 15
   sectorScale: 5
+  controlForce: 5
+  minNOverlays: 1
+  maxNOverlays: 2
+  maxNRings: 2
+  chanceForWeirdOverlay: 5
+  chanceForRing: 10
+  chanceForWeirdPlanet: 2
   devMode: 1
   currentInputType: 0
   mulletSpriteAstronaut: {fileID: 21300000, guid: a52519d2a08d6cd469d3266e0353505b,

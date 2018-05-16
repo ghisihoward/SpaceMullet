@@ -6,10 +6,10 @@ public class Planet : MonoBehaviour {
 
 	private float gravForce  = 0;
 	private float magnitude, mulletMass;
-	private GameObject planetCore, player;
+	private GameObject planetCore, planetOrbit, player;
 	private GameSettings gameSettings;
 	private LevelManager levelManager;
-	private PlanetOrbit orbit;
+	private PlanetOrbit orbitScript;
 
 	void Start () {
 		player = GameObject.FindGameObjectWithTag ("Player");
@@ -47,35 +47,70 @@ public class Planet : MonoBehaviour {
 
 	public void SetRandomPlanet () {
 		// Gotta load this here, because this is called before Start () is called.
-		levelManager = GameObject.FindGameObjectWithTag ("LevelManager").GetComponent<LevelManager> ();
-		planetCore = transform.Find ("Core").gameObject;
 		gameSettings = GameObject.Find ("GameSettings").GetComponent<GameSettings> ();
-		orbit = this.transform.Find ("Orbit").gameObject.GetComponent<PlanetOrbit> ();
+		levelManager = GameObject.FindGameObjectWithTag ("LevelManager").GetComponent<LevelManager> ();
+		planetCore = this.transform.Find ("Core").gameObject;
+		planetOrbit = this.transform.Find ("Orbit").gameObject;
+		orbitScript = planetOrbit.GetComponent<PlanetOrbit> ();
 
-		float newScale = Random.Range (gameSettings.minScale, gameSettings.maxScale);
-
-		this.transform.localScale = new Vector3 (newScale, newScale, 1);
-		this.SetGravitationForce (Random.Range (gameSettings.minGrav, gameSettings.maxGrav));
-		orbit.SetOrbit (Random.Range (gameSettings.minOrbit, gameSettings.maxOrbit));
+		// Create appearance.
+		GameObject orbitSprite = planetOrbit.transform.Find ("OrbitSprite").gameObject;
+		GameObject planetSprites = planetCore.transform.Find ("PlanetSprites").gameObject;
 
 		// Check for Weird Planet Standalone
+		if (gameSettings.chanceForWeirdPlanet > Random.Range (0, 100)) {
+			planetSprites.GetComponent<SpriteRenderer> ().sprite = levelManager.GetRandomWeirdPlanet ();
+			planetSprites.transform.Rotate (0, 0, Random.Range (0f, 360f));
+		} else {
+			// Make a normal planet otherwise
+			// Add one surface
+			planetSprites.GetComponent<SpriteRenderer> ().sprite = levelManager.GetRandomSurface ();
+			planetSprites.GetComponent<SpriteRenderer> ().sortingOrder = -6;
+			planetSprites.transform.Rotate (0, 0, Random.Range (0f, 360f));
 
+			// Check for rare overlays
+			if (gameSettings.chanceForWeirdOverlay > Random.Range (0, 100)) {
+				GameObject weirdOverlay = new GameObject ("OverlayRare");
+				weirdOverlay.transform.SetParent (planetSprites.transform, false);
+				weirdOverlay.AddComponent<SpriteRenderer> ();
+				weirdOverlay.GetComponent<SpriteRenderer> ().sprite = levelManager.GetRandomOverlayRare ();
+				weirdOverlay.transform.Rotate (0, 0, Random.Range (0f, 360f));
+			}
 
-		// Make a normal planet otherwise
+			// Add n overlays 
+			for (int i = 0; i <= Random.Range(gameSettings.minNOverlays, gameSettings.maxNOverlays); i++){
+				GameObject newOverlay = new GameObject ("OverlayN" + i);
+				newOverlay.transform.SetParent (planetSprites.transform, false);
+				newOverlay.AddComponent<SpriteRenderer> ();
+				newOverlay.GetComponent<SpriteRenderer> ().sprite = levelManager.GetRandomOverlay ();
+				newOverlay.GetComponent<SpriteRenderer> ().sortingOrder = -i;
+				newOverlay.transform.Rotate (0, 0, Random.Range (0f, 360f));
+			}
 
-		// Add one surface
-		GameObject planetSprites = planetCore.transform.Find ("Planet Sprites").gameObject;
-		planetSprites.GetComponent<SpriteRenderer> ().sprite = levelManager.GetRandomSurface ();
+			// Check and add n rings
+			if (gameSettings.chanceForRing > Random.Range (0, 100)) {
+				for (int i = 0; i <= Random.Range(0, gameSettings.maxNRings); i++){
+					GameObject newRing = new GameObject ("Ring" + i);
+					newRing.transform.SetParent (planetSprites.transform, false);
+					newRing.AddComponent<SpriteRenderer> ();
+					newRing.GetComponent<SpriteRenderer> ().sprite = levelManager.GetRandomRing ();
+					newRing.GetComponent<SpriteRenderer> ().sortingOrder = -i;
+					newRing.transform.Rotate (0, 0, Random.Range (0f, 360f));
+				}
+			}
+		}
 
-		// Check for rare overlays
+		// Give the planet a random scale
+		float newScale = Random.Range (gameSettings.minScale, gameSettings.maxScale);
+		this.transform.localScale = new Vector3 (newScale, newScale, 1);
 
-		// Add n overlays 
-		GameObject planetOverlayOne = planetSprites.transform.Find ("Overlay 1").gameObject;
-		planetOverlayOne.GetComponent<SpriteRenderer> ().sprite = levelManager.GetRandomOverlay ();
+		// Give the planet a random orbit and custom orbit image
+		float gravityScale = Random.Range (gameSettings.minGrav, gameSettings.maxGrav);
+		this.SetGravitationForce (gravityScale);
+		float gravStrPercent = (gravityScale - gameSettings.minGrav) / (gameSettings.maxGrav - gameSettings.minGrav);
 
-		GameObject planetOverlayTwo = planetSprites.transform.Find ("Overlay 2").gameObject;
-		planetOverlayTwo.GetComponent<SpriteRenderer> ().sprite = levelManager.GetRandomOverlay ();
-
-		// Add n rings
+		float orbitScale = Random.Range (gameSettings.minOrbit, gameSettings.maxOrbit);
+		orbitScript.SetOrbit (orbitScale);
+		orbitSprite.GetComponent<SpriteRenderer> ().sprite = levelManager.GetProportionalGravityWell (gravStrPercent);
 	}
 }
