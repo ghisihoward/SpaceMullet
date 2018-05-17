@@ -67,7 +67,7 @@ public class GameSettings : MonoBehaviour {
 	public bool devMode;
 	public enum InputType { RotateLocal, PushHorizontal }
 	public InputType currentInputType = InputType.RotateLocal;
-	public Sprite mulletSpriteAstronaut, mulletSpriteCosmonaut;
+	public Sprite mulletSpriteAstronaut, mulletSpriteCosmonaut, buttonPause, buttonRetry;
 	public GameObject planetPrefab, sectorPrefab;
 
 	private static GameSettings instance;

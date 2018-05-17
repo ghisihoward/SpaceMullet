@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour {
 	private int minuteCount = 0;
 
 	// GAME OBJECTS
-	private GameObject player, pauseMenu, gameOverMenu, inputObject, inputManager;
+	private GameObject player, pauseMenu, gameOverMenu, inputObject;
 	private Animator mulletAnim;
 	private ScoreManager scoreManager;
 	private LevelManager levelManager;
@@ -38,7 +38,6 @@ public class GameManager : MonoBehaviour {
 		pauseMenu = GameObject.FindGameObjectWithTag ("PauseMenu");
 		scoreText = GameObject.FindGameObjectWithTag ("ScoreField").GetComponent <Text> ();
 		inputObject = GameObject.FindGameObjectWithTag ("InputField");
-		inputManager = GameObject.FindGameObjectWithTag ("InputManager");
 		gameOverMenu = GameObject.FindGameObjectWithTag ("GameOverMenu");
 		scoreManager = GameObject.FindGameObjectWithTag ("ScoreManager").GetComponent<ScoreManager> ();
 		gameSettings = GameObject.FindGameObjectWithTag ("GameSettings").GetComponent<GameSettings> ();
@@ -46,12 +45,12 @@ public class GameManager : MonoBehaviour {
 		mulletAnim = GameObject.FindGameObjectWithTag ("PlayerSprite").GetComponent <Animator> ();
 
 		scoreName = inputObject.GetComponent <InputField> ();
-		gameOverMenu.SetActive (false);
 	
 		playerInitialPos = player.transform.position;
 		cameraInitialPos = Camera.main.transform.position;
 
-		inputManager.SetActive (false);
+		this.PlayButton ();
+		gameOverMenu.SetActive (false);
 	}
 
 	void Update () {
@@ -129,7 +128,7 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public void UpdateUI () {
-		metersText.text = "Distance: " + distance.ToString ("0.00") + "m";
+		metersText.text = "Distance: " + distance.ToString ("0.00") + "ly";
 		timerText.text = string.Format (
 			"Time: {0:0}:{1:00}", 
 			Mathf.Floor (minuteCount), 
@@ -174,7 +173,6 @@ public class GameManager : MonoBehaviour {
 		if (currentState == GameState.Menu) {
 			currentState = GameState.Ready;
 			levelManager.GenerateLevel ();
-			inputManager.SetActive (true);
 		} else if (currentState == GameState.Paused) {
 			currentState = GameState.Playing;
 		} else if (currentState == GameState.GameOver) {
@@ -190,6 +188,7 @@ public class GameManager : MonoBehaviour {
 	public void PauseButton () {
 		if (currentState == GameState.Playing) {
 			currentState = GameState.Paused;
+			pauseMenu.transform.Find ("Button_Pause").GetComponent<Image> ().sprite = gameSettings.buttonPause;
 			pauseMenu.SetActive (true);
 		}
 	}
@@ -200,6 +199,7 @@ public class GameManager : MonoBehaviour {
 			gameOverMenu.SetActive (true);
 			score = Mathf.Floor ((secondsCount + minuteCount * 60) * distance);
 			scoreText.text = "Score: " + score;
+			pauseMenu.transform.Find ("Button_Pause").GetComponent<Image> ().sprite = gameSettings.buttonRetry;
 		} 
 	}
 

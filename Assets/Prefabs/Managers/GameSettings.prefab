@@ -55,19 +55,19 @@ MonoBehaviour:
   mulletMass: 1
   mulletPositionTreshold: 0.3
   accelerationForce: 1
-  minGrav: 2
-  maxGrav: 10
-  minOrbit: 2
-  maxOrbit: 8
+  minGrav: 5
+  maxGrav: 30
+  minOrbit: 3
+  maxOrbit: 7
   minScale: 4
   maxScale: 9
   spawnDistance: 8
   maxPlanetPlayerOffset: 15
-  sectorScale: 5
+  sectorScale: 7
   controlForce: 5
   minNOverlays: 1
   maxNOverlays: 2
-  maxNRings: 2
+  maxNRings: 3
   chanceForWeirdOverlay: 5
   chanceForRing: 10
   chanceForWeirdPlanet: 2
@@ -77,6 +77,8 @@ MonoBehaviour:
     type: 3}
   mulletSpriteCosmonaut: {fileID: 21300000, guid: 84bf9f94b9ab2d441acf775b0d458a3a,
     type: 3}
+  buttonPause: {fileID: 21300000, guid: 85275f143f26eb14ebbe117be4caf625, type: 3}
+  buttonRetry: {fileID: 21300000, guid: c9d7743f5eca18b4eaf846b5588f01ce, type: 3}
   planetPrefab: {fileID: 1399843033963338, guid: 92b5874a6b62d96448c2a8029f6c92c8,
     type: 2}
   sectorPrefab: {fileID: 1878724706649996, guid: e7de755c64784fc449b6e565e217e6aa,

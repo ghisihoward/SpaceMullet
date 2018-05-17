@@ -56,17 +56,16 @@ public class Planet : MonoBehaviour {
 		// Create appearance.
 		GameObject orbitSprite = planetOrbit.transform.Find ("OrbitSprite").gameObject;
 		GameObject planetSprites = planetCore.transform.Find ("PlanetSprites").gameObject;
+		planetSprites.GetComponent<SpriteRenderer> ().sortingOrder = 0;
+		planetSprites.transform.Rotate (0, 0, Random.Range (0f, 360f));
 
 		// Check for Weird Planet Standalone
 		if (gameSettings.chanceForWeirdPlanet > Random.Range (0, 100)) {
 			planetSprites.GetComponent<SpriteRenderer> ().sprite = levelManager.GetRandomWeirdPlanet ();
-			planetSprites.transform.Rotate (0, 0, Random.Range (0f, 360f));
 		} else {
 			// Make a normal planet otherwise
 			// Add one surface
 			planetSprites.GetComponent<SpriteRenderer> ().sprite = levelManager.GetRandomSurface ();
-			planetSprites.GetComponent<SpriteRenderer> ().sortingOrder = -6;
-			planetSprites.transform.Rotate (0, 0, Random.Range (0f, 360f));
 
 			// Check for rare overlays
 			if (gameSettings.chanceForWeirdOverlay > Random.Range (0, 100)) {
@@ -83,7 +82,7 @@ public class Planet : MonoBehaviour {
 				newOverlay.transform.SetParent (planetSprites.transform, false);
 				newOverlay.AddComponent<SpriteRenderer> ();
 				newOverlay.GetComponent<SpriteRenderer> ().sprite = levelManager.GetRandomOverlay ();
-				newOverlay.GetComponent<SpriteRenderer> ().sortingOrder = -i;
+				newOverlay.GetComponent<SpriteRenderer> ().sortingOrder = i + 1;
 				newOverlay.transform.Rotate (0, 0, Random.Range (0f, 360f));
 			}
 
@@ -94,7 +93,7 @@ public class Planet : MonoBehaviour {
 					newRing.transform.SetParent (planetSprites.transform, false);
 					newRing.AddComponent<SpriteRenderer> ();
 					newRing.GetComponent<SpriteRenderer> ().sprite = levelManager.GetRandomRing ();
-					newRing.GetComponent<SpriteRenderer> ().sortingOrder = -i;
+					newRing.GetComponent<SpriteRenderer> ().sortingOrder = i + gameSettings.maxNOverlays + 1;
 					newRing.transform.Rotate (0, 0, Random.Range (0f, 360f));
 				}
 			}
