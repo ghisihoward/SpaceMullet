@@ -24,7 +24,8 @@ public class GameManager : MonoBehaviour {
 	private UnityEngine.UI.Text scoreText;
 	private UnityEngine.UI.InputField scoreName;
 
-	float score = -1f;
+	private float score = -1f;
+	private bool writeName = false;
 	// EASTER EGGS
 	private bool motherland = false;
 
@@ -85,6 +86,10 @@ public class GameManager : MonoBehaviour {
 			
 		if (currentState == GameState.GameOver && score != -1) {
 			if (scoreManager.isScore (score)){
+				if (!writeName && scoreManager.lastName != "") {
+					scoreName.text = scoreManager.lastName;
+					writeName = true;
+				}
 				if (Input.GetKey(KeyCode.Return)) InputNameSend ();
 			}
 			else if (inputObject.activeSelf) {
@@ -202,6 +207,7 @@ public class GameManager : MonoBehaviour {
 		inputObject.SetActive (true);
 		gameOverMenu.SetActive (false);
 		pauseMenu.SetActive (true);
+		writeName = false;
 		secondsCount = 0f;
 		minuteCount = 0;
 		distance = 0f;

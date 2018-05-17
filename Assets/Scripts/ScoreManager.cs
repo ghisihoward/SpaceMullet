@@ -6,6 +6,7 @@ public class ScoreManager : MonoBehaviour {
 	public int HighScoreSize = 6;
 	public List<Score> HighScores = new List<Score>();
 	public List<string> HighScoresList = new List<string>();
+	public string lastName = "";
 	string json;
 
 	void Start () {
@@ -70,6 +71,7 @@ public class ScoreManager : MonoBehaviour {
 		if ((HighScores.Count > HighScoreSize) ? (newPoint > HighScores [HighScores.Count - 1].points) : true) {
 			Score newScoreObject = new Score ();
 			newScoreObject.name = newName;
+			lastName = newName;
 			newScoreObject.points = newPoint;
 			newScoreObject.age = 0;
 			HighScores.Add (newScoreObject);
