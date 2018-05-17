@@ -609,6 +609,10 @@ Prefab:
       propertyPath: m_FontData.m_BestFit
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1413668135855622, guid: 85d33d3a159aaa24eaafd7fa18b30023, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 85d33d3a159aaa24eaafd7fa18b30023, type: 2}
   m_IsPrefabParent: 0
