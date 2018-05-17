@@ -23,7 +23,7 @@ public class OffsetScroller : MonoBehaviour {
 	}
 
 	void LateUpdate(){
-		velocityDiff = ((new Vector2 (transform.position.x, transform.position.y) - lastPos) / Time.deltaTime);
+		velocityDiff = ((new Vector2 (transform.position.x, transform.position.y) - lastPos) / (Time.deltaTime != 0 ? Time.deltaTime : 1));
 
 		lastPos = transform.position;
 		inputVector = velocityDiff;
