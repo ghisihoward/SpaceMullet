@@ -371,7 +371,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1330292502166430, guid: 6f899adb66930d347b7fe84b0b3200b8, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 212205989049842374, guid: 6f899adb66930d347b7fe84b0b3200b8,
         type: 2}
@@ -712,7 +712,7 @@ RectTransform:
   m_GameObject: {fileID: 754253465}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 92.74392, y: 92.74401, z: 92.74401}
+  m_LocalScale: {x: 113.09748, y: 113.09759, z: 113.09759}
   m_Children: []
   m_Father: {fileID: 479127554}
   m_RootOrder: 1
@@ -755,7 +755,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: -10
   m_Sprite: {fileID: 21300000, guid: e31c4d226abfedf46a29887b7cdb1475, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.603, g: 0.597, b: 0.603, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -919,6 +919,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bcfe945a4c21ad49a7397ca88dca241, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nClicks: 0
+  clicksNeeded: 10
   moveSpeed: 10
   maxVelocity: {x: 40, y: 40}
 --- !u!1 &941392323
@@ -1524,7 +1526,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.07439983, y: -1.6340257}
+  m_AnchoredPosition: {x: 0.07439983, y: -1.6340258}
   m_SizeDelta: {x: 2.48, y: 3.7999878}
   m_Pivot: {x: 0.53, y: 0.07}
 --- !u!212 &1890051946
