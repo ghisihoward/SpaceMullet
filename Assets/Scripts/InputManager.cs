@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class InputManager : MonoBehaviour {
 
@@ -24,13 +25,16 @@ public class InputManager : MonoBehaviour {
 	
 	void Update () {
 		if (Input.GetMouseButton (0)) {
-			if ((Input.mousePosition).x > Screen.width/2){
-				gameManager.GetComponent<GameManager> ().PushPlayer (Vector2.right, gameSettings.controlForce);
+			if (!EventSystem.current.IsPointerOverGameObject((Application.platform == RuntimePlatform.WindowsEditor ? -1 : (Input.GetTouch(0).fingerId)))) {
+				if ((Input.mousePosition).x > Screen.width/2){
+					gameManager.GetComponent<GameManager> ().PushPlayer (Vector2.right, gameSettings.controlForce);
 
+				}
+				else if ((Input.mousePosition).x < Screen.width/2){
+					gameManager.GetComponent<GameManager> ().PushPlayer (Vector2.left, gameSettings.controlForce);
+				}
 			}
-			else if ((Input.mousePosition).x < Screen.width/2){
-				gameManager.GetComponent<GameManager> ().PushPlayer (Vector2.left, gameSettings.controlForce);
-			} 
+
 		}
 
 		if (Input.GetMouseButtonDown (0)) {
