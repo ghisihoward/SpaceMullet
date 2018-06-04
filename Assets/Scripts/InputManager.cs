@@ -13,9 +13,6 @@ public class InputManager : MonoBehaviour {
 	private float posDeltaPositive = 0f, posDeltaNegative = 0f;
 	private float swipeStart = 0f, swipeInterval = 0f;
 
-	private KeyCode[] SSPSequence = new KeyCode[] { KeyCode.U, KeyCode.R, KeyCode.S, KeyCode.S };
-	private int SSPSequenceIndex = 0;
-
 	void Start () {
 		gameManager = GameObject.FindGameObjectWithTag ("GameManager");
 		gameSettings = GameObject.FindGameObjectWithTag ("GameSettings").GetComponent <GameSettings> ();
@@ -69,17 +66,6 @@ public class InputManager : MonoBehaviour {
 		if (gameSettings.devMode) {
 			if (Input.GetKeyDown (KeyCode.K))
 				gameManager.GetComponent<GameManager> ().PlayerCollision ();
-
-			if (Input.GetKeyDown (SSPSequence [SSPSequenceIndex])) {
-				SSPSequenceIndex += 1;
-
-				if (SSPSequenceIndex == SSPSequence.Length) {
-					SSPSequenceIndex = 0;
-					gameManager.GetComponent<GameManager> ().SovietSpaceProgram ();
-				}
-			} else if (Input.anyKeyDown) {
-				SSPSequenceIndex = 0;
-			}
 		}
 	}
 

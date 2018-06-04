@@ -26,9 +26,6 @@ public class GameManager : MonoBehaviour {
 
 	private float score = -1f;
 	private bool writeName = false;
-	// EASTER EGGS
-	private bool motherland = false;
-
 
 	void Start () {
 		timerText = GameObject.Find ("TextBox_Time").GetComponent<Text> ();
@@ -51,6 +48,9 @@ public class GameManager : MonoBehaviour {
 
 		this.PlayButton ();
 		gameOverMenu.SetActive (false);
+
+		//if (gameSettings.devMode) 
+		//	player.transform.Find ("PlayerSprite").GetComponent<SpriteRenderer> ().sprite = gameSettings.mulletSpriteCosmonaut;
 	}
 
 	void Update () {
@@ -229,15 +229,5 @@ public class GameManager : MonoBehaviour {
 
 	public void resetCamera () {
 		Camera.main.transform.position = cameraInitialPos;
-	}
-
-	public void SovietSpaceProgram () {
-		if (!motherland) {
-			player.transform.Find ("PlayerSprite").GetComponent<SpriteRenderer> ().sprite = gameSettings.mulletSpriteCosmonaut;
-			motherland = true;
-		} else {
-			player.transform.Find ("PlayerSprite").GetComponent<SpriteRenderer> ().sprite = gameSettings.mulletSpriteAstronaut;
-			motherland = false;
-		}
 	}
 }

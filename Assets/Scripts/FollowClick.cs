@@ -34,6 +34,9 @@ public class FollowClick : MonoBehaviour {
 
 				if (nClicks >= clicksNeeded) {
 					activated = true;
+					GameSettings gameSettings = GameObject.FindWithTag ("GameSettings").GetComponent<GameSettings> ();
+					gameSettings.devMode = true;
+					transform.Find ("Mullet").GetComponent<SpriteRenderer> ().sprite = gameSettings.mulletSpriteCosmonaut;
 				}
 			}
 		}
