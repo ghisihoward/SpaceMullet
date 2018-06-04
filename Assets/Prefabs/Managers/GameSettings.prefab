@@ -71,7 +71,7 @@ MonoBehaviour:
   chanceForWeirdOverlay: 5
   chanceForRing: 10
   chanceForWeirdPlanet: 2
-  devMode: 1
+  devMode: 0
   currentInputType: 0
   mulletSpriteAstronaut: {fileID: 21300000, guid: a52519d2a08d6cd469d3266e0353505b,
     type: 3}
