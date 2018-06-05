@@ -15,7 +15,6 @@ public class GameManager : MonoBehaviour {
 
 	// GAME OBJECTS
 	private GameObject player, pauseMenu, gameOverMenu, inputObject;
-	private Animator mulletAnim;
 	private ScoreManager scoreManager;
 	private LevelManager levelManager;
 	private GameSettings gameSettings;
@@ -41,7 +40,6 @@ public class GameManager : MonoBehaviour {
 		scoreManager = GameObject.FindGameObjectWithTag ("ScoreManager").GetComponent<ScoreManager> ();
 		gameSettings = GameObject.FindGameObjectWithTag ("GameSettings").GetComponent<GameSettings> ();
 		levelManager = GameObject.FindGameObjectWithTag ("LevelManager").GetComponent<LevelManager> ();
-		mulletAnim = GameObject.FindGameObjectWithTag ("PlayerSprite").GetComponent <Animator> ();
 
 		scoreName = inputObject.GetComponent <InputField> ();
 	
@@ -50,33 +48,12 @@ public class GameManager : MonoBehaviour {
 
 		this.PlayButton ();
 		gameOverMenu.SetActive (false);
-
-		//if (gameSettings.devMode) 
-		//	player.transform.Find ("PlayerSprite").GetComponent<SpriteRenderer> ().sprite = gameSettings.mulletSpriteCosmonaut;
 	}
 
 	void Update () {
-		if (
-			currentState != GameState.Paused &&
-			currentState != GameState.GameOver
-		) {
-			Time.timeScale = 1f;
-		}
-
 		if (currentState == GameState.Playing) {
 			UpdateStats ();
 			UpdateUI ();
-		}
-
-		if (
-			currentState == GameState.Paused ||
-			currentState == GameState.GameOver ||
-			currentState == GameState.Ready ||
-			currentState == GameState.Menu
-		) {
-			mulletAnim.enabled = false;
-		} else {
-			mulletAnim.enabled = true;
 		}
 			
 		if (Blitzkrieg.GetGameObjectPosition(player).y < -0.009) {
@@ -140,18 +117,8 @@ public class GameManager : MonoBehaviour {
 		this.PlayerDeath ();
 	}
 
-	public void VerticalSwipe (float swipeMagnitude) {
-		if (currentState == GameState.Ready) {
-			// TODO Review Math
-			Vector3 forceVector = new Vector3 (0, 1 * swipeMagnitude, 0);
-			player.GetComponent<Rigidbody2D> ().AddForce (forceVector);
-			currentState = GameState.Playing;
-		}		
-	}
-
 	public void VerticalSwipe (Vector2 force) {
 		if (currentState == GameState.Ready) {
-			// TODO Review Math
 			player.GetComponent<Rigidbody2D> ().AddForce (force);
 			currentState = GameState.Playing;
 		}		
@@ -172,9 +139,11 @@ public class GameManager : MonoBehaviour {
 	public void PlayButton () {
 		if (currentState == GameState.Menu) {
 			currentState = GameState.Ready;
+			Time.timeScale = 1f;
 			levelManager.GenerateLevel ();
 		} else if (currentState == GameState.Paused) {
 			currentState = GameState.Playing;
+			Time.timeScale = 1f;
 		} else if (currentState == GameState.GameOver) {
 			levelManager.CleanGameWorld ();
 			levelManager.GenerateLevel ();
@@ -225,6 +194,7 @@ public class GameManager : MonoBehaviour {
 		player.GetComponent<Rigidbody2D> ().angularVelocity = 0f;
 		player.SetActive (true);
 		currentState = GameState.Ready;
+		Time.timeScale = 1f;
 	}
 
 	public void resetCamera () {
