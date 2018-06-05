@@ -56,6 +56,7 @@ MonoBehaviour:
   mulletPositionTreshold: 0.3
   accelerationForce: 1
   maxSwipeTime: 0.5
+  minSwipeMagnitude: 100
   minGrav: 5
   maxGrav: 30
   minOrbit: 3

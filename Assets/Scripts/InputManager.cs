@@ -50,16 +50,11 @@ public class InputManager : MonoBehaviour {
 			swipeInterval = Mathf.Min (Time.time - swipeStart, gameSettings.maxSwipeTime);
 
 			// Mullet launching gameplay mechanic.
-			if (mouseDeltaY > 0) {
-				// Review Math if needed.
-				if (posDeltaPositive > 0.02 && posDeltaNegative > 0.02) {
-					gameManager.GetComponent<GameManager> ().VerticalSwipe (
-						new Vector2 (
-							(mouseDeltaX * 50 * gameSettings.accelerationForce) / swipeInterval, 
-							(mouseDeltaY * 50 * gameSettings.accelerationForce) / swipeInterval
-						)
-					);
-				}
+			if (mouseDeltaY > 0 && posDeltaPositive > 0.02 && posDeltaNegative > 0.02) {
+				this.trySwipe (new Vector2 (
+					(mouseDeltaX * 50 * gameSettings.accelerationForce) / swipeInterval, 
+					(mouseDeltaY * 50 * gameSettings.accelerationForce) / swipeInterval
+				));
 			}
 		}
 
@@ -74,5 +69,10 @@ public class InputManager : MonoBehaviour {
 			Camera.main.ScreenToViewportPoint (new Vector3 (mouseX, mouseY, 0)).x,
 			Camera.main.ScreenToViewportPoint (new Vector3 (mouseX, mouseY, 0)).y
 		);
+	}
+
+	public void trySwipe (Vector2 swipe) {
+		if (swipe.magnitude > gameSettings.minSwipeMagnitude)
+			gameManager.GetComponent<GameManager> ().VerticalSwipe (swipe);
 	}
 }

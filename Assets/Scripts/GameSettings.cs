@@ -19,6 +19,9 @@ public class GameSettings : MonoBehaviour {
 	[Range (0.1f, 1f)]
 	public float maxSwipeTime = 0.5f;
 
+	[Range (50, 150)]
+	public float minSwipeMagnitude = 50;
+
 	[Range (1, 100)]
 	public float minGrav = 2;
 
