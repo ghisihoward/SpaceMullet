@@ -6,7 +6,7 @@ public class GameManager : MonoBehaviour {
 
 	// GAME STATES
 	private enum GameState { Menu, Ready, Playing, Paused, GameOver }
-	private GameState currentState = GameState.Menu;
+	private GameState currentState;
 
 	// TIMER
 	private Text timerText, metersText;
@@ -28,6 +28,8 @@ public class GameManager : MonoBehaviour {
 	private bool writeName = false;
 
 	void Start () {
+		currentState = GameState.Menu;
+
 		timerText = GameObject.Find ("TextBox_Time").GetComponent<Text> ();
 		metersText = GameObject.Find ("TextBox_Distance").GetComponent<Text> ();
 
@@ -55,11 +57,9 @@ public class GameManager : MonoBehaviour {
 
 	void Update () {
 		if (
-			currentState == GameState.Paused ||
-			currentState == GameState.GameOver
+			currentState != GameState.Paused &&
+			currentState != GameState.GameOver
 		) {
-			Time.timeScale = 0f;
-		} else {
 			Time.timeScale = 1f;
 		}
 
@@ -186,10 +186,11 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public void PauseButton () {
-		if (currentState == GameState.Playing) {
+		if (currentState == GameState.Playing || currentState == GameState.Ready) {
 			currentState = GameState.Paused;
 			pauseMenu.transform.Find ("Button_Pause").GetComponent<Image> ().sprite = gameSettings.buttonPause;
 			pauseMenu.SetActive (true);
+			Time.timeScale = 0f;
 		}
 	}
 
@@ -200,6 +201,7 @@ public class GameManager : MonoBehaviour {
 			score = Mathf.Floor ((secondsCount + minuteCount * 60) * distance);
 			scoreText.text = "Score: " + score;
 			pauseMenu.transform.Find ("Button_Pause").GetComponent<Image> ().sprite = gameSettings.buttonRetry;
+			Time.timeScale = 0f;
 		} 
 	}
 
@@ -222,8 +224,6 @@ public class GameManager : MonoBehaviour {
 		player.GetComponent<Rigidbody2D> ().velocity = new Vector2 (0f, 0f);
 		player.GetComponent<Rigidbody2D> ().angularVelocity = 0f;
 		player.SetActive (true);
-
-
 		currentState = GameState.Ready;
 	}
 

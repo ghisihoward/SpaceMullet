@@ -10,13 +10,13 @@ public class LevelManager : MonoBehaviour {
 	private List<Sprite> gravityWells, overlays, overlaysRare, rings, surfaces, weirdPlanets;
 
 	public void Start () {
-		gameWorld = GameObject.FindGameObjectWithTag ("GameWorld");
-		gameSettings = GameObject.FindGameObjectWithTag ("GameSettings").GetComponent<GameSettings> ();
-		sectors = gameWorld.transform.Find("Sectors").gameObject;
 		this.setUpTexturesResources ();
 	}
 
 	public void GenerateLevel () {
+		gameWorld = GameObject.FindGameObjectWithTag ("GameWorld");
+		gameSettings = GameObject.FindGameObjectWithTag ("GameSettings").GetComponent<GameSettings> ();
+		sectors = gameWorld.transform.Find("Sectors").gameObject;
 		Instantiate (gameSettings.sectorPrefab, gameWorld.transform.position, Quaternion.identity, sectors.transform);
 	}
 

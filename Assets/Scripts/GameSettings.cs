@@ -16,6 +16,9 @@ public class GameSettings : MonoBehaviour {
 	[Range (1, 10)]
 	public float accelerationForce = 1f;
 
+	[Range (0.1f, 1f)]
+	public float maxSwipeTime = 0.5f;
+
 	[Range (1, 100)]
 	public float minGrav = 2;
 

@@ -47,11 +47,11 @@ public class InputManager : MonoBehaviour {
 			posDeltaPositive = mouseDeltaY - mouseDeltaX;
 			posDeltaNegative = mouseDeltaY + mouseDeltaX;
 
-			swipeInterval = Time.time - swipeStart;
+			swipeInterval = Mathf.Min (Time.time - swipeStart, gameSettings.maxSwipeTime);
 
+			// Mullet launching gameplay mechanic.
 			if (mouseDeltaY > 0) {
-				// TODO
-				// Review Math
+				// Review Math if needed.
 				if (posDeltaPositive > 0.02 && posDeltaNegative > 0.02) {
 					gameManager.GetComponent<GameManager> ().VerticalSwipe (
 						new Vector2 (

@@ -53,6 +53,7 @@ public class SceneSwapper : MonoBehaviour {
 
 		// ヽ(^‿^)ノ
 
+		Time.timeScale = 1f;
 	}
 
 
