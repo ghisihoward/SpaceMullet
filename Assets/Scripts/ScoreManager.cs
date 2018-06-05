@@ -13,7 +13,7 @@ public class ScoreManager : MonoBehaviour {
 		GetHighScore ();
 	}
 
-	void sortScore(string type){
+	void sortScore (string type) {
 		if (type == "points") {
 			HighScores.Sort ((p1, p2) => (p1.points == p2.points ? p2.points + p2.age : p2.points).CompareTo (p1.points == p2.points ? p1.points + p1.age : p1.points));
 		} 
@@ -22,7 +22,7 @@ public class ScoreManager : MonoBehaviour {
 		}
 	}
 
-	void SetHighScore(){
+	void SetHighScore () {
 		sortScore ("points");
 		HighScoresList.Clear ();
 
@@ -55,7 +55,7 @@ public class ScoreManager : MonoBehaviour {
 		PlayerPrefs.Save ();
 	}
 
-	void GetHighScore(){
+	void GetHighScore () {
 		json = PlayerPrefs.GetString ("Score", "");
 		JsonUtility.FromJsonOverwrite (json, this);
 
@@ -67,7 +67,7 @@ public class ScoreManager : MonoBehaviour {
 		}
 	}
 
-	public void AddScore(string newName, float newPoint){
+	public void AddScore (string newName, float newPoint) {
 		if ((HighScores.Count > HighScoreSize) ? (newPoint > HighScores [HighScores.Count - 1].points) : true) {
 			Score newScoreObject = new Score ();
 			newScoreObject.name = newName;
@@ -79,15 +79,24 @@ public class ScoreManager : MonoBehaviour {
 		}
 	}
 
-	public Score GetScoreAt(int pos){
-		return HighScores [pos - 1];
+	public Score GetScoreAt (int pos) {
+		try {
+			return HighScores [pos - 1];
+		} catch (System.ArgumentOutOfRangeException) {
+			Score mockJoe = new Score ();
+			mockJoe.age = 0;
+			mockJoe.points = 0;
+			mockJoe.name = "";
+
+			return mockJoe;
+		}
 	}
 
-	public float GetPointAt(int pos){
+	public float GetPointAt (int pos) {
 		return HighScores [pos - 1].points;
 	}
 
-	public bool isScore (float newScore){
+	public bool isHighScore (float newScore) {
 		float scoreMin = ((HighScores.Count < HighScoreSize) ? 0 : HighScores [HighScores.Count - 1].points);
 		return (newScore > scoreMin);
 	}

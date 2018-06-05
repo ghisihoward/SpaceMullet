@@ -20,7 +20,8 @@ public class GameManager : MonoBehaviour {
 	private GameSettings gameSettings;
 	private Vector3 playerInitialPos, cameraInitialPos;
 
-	private UnityEngine.UI.Text scoreText;
+	private GameObject scoreBoard, newScoreField, overloadField;
+	private UnityEngine.UI.Text scoreBoardNames, scoreBoardPoints, inputNewScore;
 	private UnityEngine.UI.InputField scoreName;
 
 	private float score = -1f;
@@ -34,19 +35,24 @@ public class GameManager : MonoBehaviour {
 
 		player = GameObject.FindGameObjectWithTag ("Player");
 		pauseMenu = GameObject.FindGameObjectWithTag ("PauseMenu");
-		scoreText = GameObject.FindGameObjectWithTag ("ScoreField").GetComponent <Text> ();
 		inputObject = GameObject.FindGameObjectWithTag ("InputField");
+		newScoreField = GameObject.FindGameObjectWithTag ("ScoreField");
+		overloadField = GameObject.FindGameObjectWithTag ("OverloadField");
+		scoreBoard = GameObject.FindGameObjectWithTag ("HighScoreField");
+		scoreBoardNames = scoreBoard.transform.Find ("Names").GetComponent<Text> ();
+		scoreBoardPoints = scoreBoard.transform.Find ("Points").GetComponent<Text> ();
+		scoreName = inputObject.transform.Find("NameField").GetComponent <InputField> ();
 		gameOverMenu = GameObject.FindGameObjectWithTag ("GameOverMenu");
 		scoreManager = GameObject.FindGameObjectWithTag ("ScoreManager").GetComponent<ScoreManager> ();
 		gameSettings = GameObject.FindGameObjectWithTag ("GameSettings").GetComponent<GameSettings> ();
 		levelManager = GameObject.FindGameObjectWithTag ("LevelManager").GetComponent<LevelManager> ();
 
-		scoreName = inputObject.GetComponent <InputField> ();
-	
 		playerInitialPos = player.transform.position;
 		cameraInitialPos = Camera.main.transform.position;
 
 		this.PlayButton ();
+
+		overloadField.SetActive (false);
 		gameOverMenu.SetActive (false);
 	}
 
@@ -61,7 +67,7 @@ public class GameManager : MonoBehaviour {
 		}
 			
 		if (currentState == GameState.GameOver && score != -1) {
-			if (scoreManager.isScore (score)){
+			if (scoreManager.isHighScore (score)){
 				if (!writeName && scoreManager.lastName != "") {
 					scoreName.text = scoreManager.lastName;
 					writeName = true;
@@ -70,11 +76,12 @@ public class GameManager : MonoBehaviour {
 			}
 			else if (inputObject.activeSelf) {
 				inputObject.SetActive (false);
+				overloadField.SetActive (true);
 			}
 		}
 	} 
 
-	public void InputNameSend (){
+	public void InputNameSend () {
 		if (scoreName.text != "") {				
 			scoreManager.AddScore (scoreName.text, score);
 			scoreName.text = "";
@@ -82,7 +89,7 @@ public class GameManager : MonoBehaviour {
 		}
 	}
 
-	public void GameOvertoPause(){
+	public void GameOvertoPause () {
 		if (!inputObject.activeSelf) {
 			CleanUp ();
 		}
@@ -124,7 +131,7 @@ public class GameManager : MonoBehaviour {
 		}		
 	}
 
-	public void PushPlayer(Vector2 dir, float force){
+	public void PushPlayer (Vector2 dir, float force) {
 		if (currentState == GameState.Playing) {
 			if (gameSettings.currentInputType == GameSettings.InputType.RotateLocal) {
 				Vector2 resultForce = player.transform.rotation * dir * force;
@@ -168,14 +175,25 @@ public class GameManager : MonoBehaviour {
 			currentState = GameState.GameOver;
 			gameOverMenu.SetActive (true);
 			score = Mathf.Floor ((secondsCount + minuteCount * 60) * distance);
-			scoreText.text = "Score: " + score;
+			scoreBoardNames.text = scoreManager.GetScoreAt (1).name + "\n" +
+				scoreManager.GetScoreAt (2).name + "\n" +
+				scoreManager.GetScoreAt (3).name + "\n" +
+				scoreManager.GetScoreAt (4).name + "\n" +
+				scoreManager.GetScoreAt (5).name;
+			scoreBoardPoints.text = scoreManager.GetScoreAt (1).points+ "\n" +
+				scoreManager.GetScoreAt (2).points + "\n" +
+				scoreManager.GetScoreAt (3).points + "\n" +
+				scoreManager.GetScoreAt (4).points + "\n" +
+				scoreManager.GetScoreAt (5).points;
+			newScoreField.transform.Find ("NewScoreField").GetComponent<Text> ().text = score.ToString();
 			pauseMenu.transform.Find ("Button_Pause").GetComponent<Image> ().sprite = gameSettings.buttonRetry;
 			Time.timeScale = 0f;
 		} 
 	}
 
-	public void CleanUp(){
+	public void CleanUp () {
 		inputObject.SetActive (true);
+		overloadField.SetActive (false);
 		gameOverMenu.SetActive (false);
 		pauseMenu.SetActive (true);
 		writeName = false;

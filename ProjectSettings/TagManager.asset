@@ -22,6 +22,8 @@ TagManager:
   - Planet
   - InputManager
   - PlayerSprite
+  - HighScoreField
+  - OverloadField
   layers:
   - Default
   - TransparentFX
