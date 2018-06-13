@@ -839,7 +839,7 @@ GameObject:
   - component: {fileID: 879800044}
   m_Layer: 0
   m_Name: MulletPivot
-  m_TagString: Untagged
+  m_TagString: MenuMullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -852,7 +852,7 @@ RectTransform:
   m_GameObject: {fileID: 879800042}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 316.76022, y: 316.76022, z: 316.76022}
+  m_LocalScale: {x: 315, y: 315, z: 315}
   m_Children:
   - {fileID: 1890051945}
   m_Father: {fileID: 479127554}
@@ -958,7 +958,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -273.00003, y: 100}
+  m_AnchoredPosition: {x: -273.00006, y: 100}
   m_SizeDelta: {x: 260, y: 140}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &941392325
@@ -1504,6 +1504,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1890051945}
   - component: {fileID: 1890051946}
+  - component: {fileID: 1890051947}
   m_Layer: 0
   m_Name: Mullet
   m_TagString: Untagged
@@ -1571,6 +1572,23 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
+--- !u!95 &1890051947
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1890051944}
+  m_Enabled: 0
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: bc2bb0dc09552d34696ed35942ee9e97, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &2089141266 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114096582804809430, guid: 6f899adb66930d347b7fe84b0b3200b8,

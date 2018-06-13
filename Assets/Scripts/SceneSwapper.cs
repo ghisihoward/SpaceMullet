@@ -43,7 +43,7 @@ public class SceneSwapper : MonoBehaviour {
 		// Now the *mood* is set, we have have the audioManager and the script
 		// so we ask the *cool* dude to start playing music.
 
-
+		Time.timeScale = 1f;
 		SceneManager.LoadScene (sceneName);
 		// \(ツ)_ *FINALLY* we change scene.
 		// The cool dude is already playing the right music.
@@ -52,9 +52,5 @@ public class SceneSwapper : MonoBehaviour {
 		// ( •_•)>⌐□-□ / (⌐□_□),
 
 		// ヽ(^‿^)ノ
-
-		Time.timeScale = 1f;
 	}
-
-
 }

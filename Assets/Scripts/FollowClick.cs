@@ -9,8 +9,14 @@ public class FollowClick : MonoBehaviour {
 	public Vector2 maxVelocity = new Vector2(40f, 40f);
 	private bool holding = false, activated = false;
 	private Vector2 destination, direction;
+	private Transform mullet;
 
 	// Update is called once per frame
+	void Start () {
+		mullet = gameObject.transform.GetChild (0);
+		mullet.GetComponent<Animator> ().enabled = true;
+	}
+
 	void Update () {
 		if (activated) {
 			if (Input.GetMouseButtonDown (0)) {
@@ -30,13 +36,19 @@ public class FollowClick : MonoBehaviour {
 			}
 		} else {
 			if (Input.GetMouseButtonDown (0)) {
-				nClicks += 1;
+				Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
+				RaycastHit2D hit = Physics2D.Raycast (ray.origin, ray.direction, Mathf.Infinity);
 
-				if (nClicks >= clicksNeeded) {
-					activated = true;
-					GameSettings gameSettings = GameObject.FindWithTag ("GameSettings").GetComponent<GameSettings> ();
-					gameSettings.devMode = true;
-					transform.Find ("Mullet").GetComponent<SpriteRenderer> ().sprite = gameSettings.mulletSpriteCosmonaut;
+				if (hit != null && hit.collider != null && hit.collider.tag == "MenuMullet") {
+					nClicks += 1;
+					mullet.GetComponent<Animator> ().SetTrigger ("PlaySquish");
+
+					if (nClicks >= clicksNeeded) {
+						activated = true;
+						GameSettings gameSettings = GameObject.FindWithTag ("GameSettings").GetComponent<GameSettings> ();
+						gameSettings.devMode = true;
+						transform.Find ("Mullet").GetComponent<SpriteRenderer> ().sprite = gameSettings.mulletSpriteCosmonaut;
+					}
 				}
 			}
 		}

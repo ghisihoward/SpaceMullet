@@ -24,6 +24,7 @@ TagManager:
   - PlayerSprite
   - HighScoreField
   - OverloadField
+  - MenuMullet
   layers:
   - Default
   - TransparentFX
