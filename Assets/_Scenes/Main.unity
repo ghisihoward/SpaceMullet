@@ -449,17 +449,12 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 114546920573521184, guid: 85d33d3a159aaa24eaafd7fa18b30023,
+    - target: {fileID: 223056764880056086, guid: 85d33d3a159aaa24eaafd7fa18b30023,
         type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      propertyPath: m_Camera
       value: 
-      objectReference: {fileID: 716848191}
-    - target: {fileID: 114955893586037510, guid: 85d33d3a159aaa24eaafd7fa18b30023,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 716848191}
-    - target: {fileID: 114077664124834746, guid: 85d33d3a159aaa24eaafd7fa18b30023,
+      objectReference: {fileID: 28751648}
+    - target: {fileID: 114974456711206106, guid: 85d33d3a159aaa24eaafd7fa18b30023,
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -469,16 +464,75 @@ Prefab:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 716848191}
-    - target: {fileID: 114974456711206106, guid: 85d33d3a159aaa24eaafd7fa18b30023,
+    - target: {fileID: 114077664124834746, guid: 85d33d3a159aaa24eaafd7fa18b30023,
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 716848191}
-    - target: {fileID: 223056764880056086, guid: 85d33d3a159aaa24eaafd7fa18b30023,
+    - target: {fileID: 114955893586037510, guid: 85d33d3a159aaa24eaafd7fa18b30023,
         type: 2}
-      propertyPath: m_Camera
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 28751648}
+      objectReference: {fileID: 716848191}
+    - target: {fileID: 114546920573521184, guid: 85d33d3a159aaa24eaafd7fa18b30023,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 716848191}
+    - target: {fileID: 224583474063353138, guid: 85d33d3a159aaa24eaafd7fa18b30023,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: -300
+      objectReference: {fileID: 0}
+    - target: {fileID: 224583474063353138, guid: 85d33d3a159aaa24eaafd7fa18b30023,
+        type: 2}
+      propertyPath: m_SizeDelta.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 212725944151188642, guid: 85d33d3a159aaa24eaafd7fa18b30023,
+        type: 2}
+      propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 212305449261290164, guid: 85d33d3a159aaa24eaafd7fa18b30023,
+        type: 2}
+      propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 212084037254494560, guid: 85d33d3a159aaa24eaafd7fa18b30023,
+        type: 2}
+      propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1389144485562492, guid: 85d33d3a159aaa24eaafd7fa18b30023, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1117762941322070, guid: 85d33d3a159aaa24eaafd7fa18b30023, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1220363453363504, guid: 85d33d3a159aaa24eaafd7fa18b30023, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1413668135855622, guid: 85d33d3a159aaa24eaafd7fa18b30023, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1605817573170760, guid: 85d33d3a159aaa24eaafd7fa18b30023, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 95299200755693208, guid: 85d33d3a159aaa24eaafd7fa18b30023,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1357839885189500, guid: 85d33d3a159aaa24eaafd7fa18b30023, type: 2}
+      propertyPath: m_TagString
+      value: Tutorial
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 85d33d3a159aaa24eaafd7fa18b30023, type: 2}
   m_IsPrefabParent: 0

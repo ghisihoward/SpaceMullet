@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour {
 	private int minuteCount = 0;
 
 	// GAME OBJECTS
-	private GameObject player, pauseMenu, gameOverMenu, inputObject;
+	private GameObject player, pauseMenu, gameOverMenu, inputObject, tutorialObject;
 	private ScoreManager scoreManager;
 	private LevelManager levelManager;
 	private GameSettings gameSettings;
@@ -46,6 +46,7 @@ public class GameManager : MonoBehaviour {
 		scoreManager = GameObject.FindGameObjectWithTag ("ScoreManager").GetComponent<ScoreManager> ();
 		gameSettings = GameObject.FindGameObjectWithTag ("GameSettings").GetComponent<GameSettings> ();
 		levelManager = GameObject.FindGameObjectWithTag ("LevelManager").GetComponent<LevelManager> ();
+		tutorialObject = GameObject.FindGameObjectWithTag ("Tutorial");
 
 		playerInitialPos = player.transform.position;
 		cameraInitialPos = Camera.main.transform.position;
@@ -128,6 +129,8 @@ public class GameManager : MonoBehaviour {
 		if (currentState == GameState.Ready) {
 			player.GetComponent<Rigidbody2D> ().AddForce (force);
 			currentState = GameState.Playing;
+			tutorialObject.transform.Find ("Finger").GetComponent<Animator>().SetTrigger("StartGame");
+			tutorialObject.transform.Find ("Arrows").GetComponent<Animator>().SetTrigger("PlayArrows");
 		}		
 	}
 

@@ -25,6 +25,7 @@ TagManager:
   - HighScoreField
   - OverloadField
   - MenuMullet
+  - Tutorial
   layers:
   - Default
   - TransparentFX
