@@ -47,6 +47,9 @@ public class FollowClick : MonoBehaviour {
 						activated = true;
 						GameSettings gameSettings = GameObject.FindWithTag ("GameSettings").GetComponent<GameSettings> ();
 						gameSettings.devMode = true;
+
+						AudioManager audioManager = GameObject.FindWithTag ("AudioManager").GetComponent<AudioManager> ();
+						audioManager.ChangeMusic ("Russian");
 						transform.Find ("Mullet").GetComponent<SpriteRenderer> ().sprite = gameSettings.mulletSpriteCosmonaut;
 					}
 				}

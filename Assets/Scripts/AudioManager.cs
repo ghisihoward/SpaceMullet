@@ -6,8 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class AudioManager : MonoBehaviour {
 
-	public AudioClip menuMusic;
-	public AudioClip mainMusic;
+	public AudioClip menuMusic, mainMusic, russianMusic;
 	private AudioSource audioSource;
 	private Dictionary<string, AudioClip> audioDict;
 	private string musicToPlay, musicPlaying;
@@ -23,6 +22,7 @@ public class AudioManager : MonoBehaviour {
 			audioDict.Add ("Menu", menuMusic);
 			audioDict.Add ("Credits", menuMusic);
 			audioDict.Add ("Main", mainMusic);
+			audioDict.Add ("Russian", russianMusic);
 			GameObject.DontDestroyOnLoad (gameObject);
 			audioSource = GetComponent<AudioSource> ();
 

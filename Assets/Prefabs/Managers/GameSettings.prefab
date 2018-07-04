@@ -55,7 +55,7 @@ MonoBehaviour:
   mulletMass: 1
   mulletPositionTreshold: 0.3
   accelerationForce: 1
-  maxSwipeTime: 0.5
+  maxSwipeTime: 0.8
   minSwipeMagnitude: 100
   minGrav: 5
   maxGrav: 30
@@ -66,7 +66,7 @@ MonoBehaviour:
   spawnDistance: 8
   maxPlanetPlayerOffset: 15
   sectorScale: 7
-  controlForce: 5
+  controlForce: 8
   minNOverlays: 1
   maxNOverlays: 2
   maxNRings: 3

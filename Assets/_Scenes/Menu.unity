@@ -1492,6 +1492,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 114292777554162552, guid: 61922cc239ec6084a8e7fe96e55cdb3d,
+        type: 2}
+      propertyPath: russianMusic
+      value: 
+      objectReference: {fileID: 8300000, guid: a76ca72a579201441b8fa7c84d8427df, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 61922cc239ec6084a8e7fe96e55cdb3d, type: 2}
   m_IsPrefabParent: 0
