@@ -10,6 +10,7 @@ public class AudioManager : MonoBehaviour {
 	private AudioSource audioSource;
 	private Dictionary<string, AudioClip> audioDict;
 	private string musicToPlay, musicPlaying;
+	private bool playingRussian = false;
 
 	static AudioManager instance = null;
 
@@ -35,10 +36,12 @@ public class AudioManager : MonoBehaviour {
 		if (musicPlaying == null ||
 			!audioDict[musicToPlay].Equals(audioDict[musicPlaying])
 		) {
-			// If we wanna do fades, here is the thing.
-			audioSource.clip = audioDict [musicToPlay];
-			audioSource.Play ();
-			musicPlaying = musicToPlay;
+			if (musicPlaying != "Russian" || musicToPlay == "Menu") {
+				// If we wanna do fades, here is the thing.
+				audioSource.clip = audioDict [musicToPlay];
+				audioSource.Play ();
+				musicPlaying = musicToPlay;
+			}
 		}
 	}
 }
