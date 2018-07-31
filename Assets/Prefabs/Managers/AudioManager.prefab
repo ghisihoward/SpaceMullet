@@ -35,7 +35,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1372495282460712}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.0020700013, y: -4.6209097, z: 124.43555}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -134,3 +134,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   menuMusic: {fileID: 8300000, guid: e52be6a8686e9b443a05ffb9d051b2f0, type: 3}
   mainMusic: {fileID: 8300000, guid: 98dbe0d7ac0c93144a3b3e022a912bf1, type: 3}
+  russianMusic: {fileID: 8300000, guid: a42c56681e02a2d45871cab16d54533e, type: 3}

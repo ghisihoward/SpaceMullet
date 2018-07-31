@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FollowClick : MonoBehaviour {
 
-	public float nClicks = 0, clicksNeeded = 20;
+	public float nClicks = 0, clicksNeeded = 3;
 	public float moveSpeed = 1f;
 	public Vector2 maxVelocity = new Vector2(40f, 40f);
 	private bool holding = false, activated = false;

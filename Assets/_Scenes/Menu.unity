@@ -317,7 +317,7 @@ Prefab:
     - target: {fileID: 224652783578953726, guid: 6f899adb66930d347b7fe84b0b3200b8,
         type: 2}
       propertyPath: m_RootOrder
-      value: 8
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 224652783578953726, guid: 6f899adb66930d347b7fe84b0b3200b8,
         type: 2}
@@ -419,6 +419,26 @@ Prefab:
     - target: {fileID: 4852030116884154, guid: 3b2cd0c92a610ee469d30375ac553232, type: 2}
       propertyPath: m_RootOrder
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114656459641283302, guid: 3b2cd0c92a610ee469d30375ac553232,
+        type: 2}
+      propertyPath: devMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114656459641283302, guid: 3b2cd0c92a610ee469d30375ac553232,
+        type: 2}
+      propertyPath: maxSwipeTime
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114656459641283302, guid: 3b2cd0c92a610ee469d30375ac553232,
+        type: 2}
+      propertyPath: minSwipeMagnitude
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 114656459641283302, guid: 3b2cd0c92a610ee469d30375ac553232,
+        type: 2}
+      propertyPath: mulletPositionTreshold
+      value: 0.576
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3b2cd0c92a610ee469d30375ac553232, type: 2}
@@ -920,7 +940,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nClicks: 0
-  clicksNeeded: 10
+  clicksNeeded: 3
   moveSpeed: 10
   maxVelocity: {x: 40, y: 40}
 --- !u!1 &941392323
@@ -1492,11 +1512,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 114292777554162552, guid: 61922cc239ec6084a8e7fe96e55cdb3d,
-        type: 2}
-      propertyPath: russianMusic
-      value: 
-      objectReference: {fileID: 8300000, guid: a76ca72a579201441b8fa7c84d8427df, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 61922cc239ec6084a8e7fe96e55cdb3d, type: 2}
   m_IsPrefabParent: 0
